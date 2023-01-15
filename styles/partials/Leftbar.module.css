@@ -1,0 +1,27 @@
+.maincontainer {
+  @apply h-full;
+}
+.container {
+  @apply fixed w-56 -bottom-20 right-[25%] translate-x-[50%] lg:translate-x-0 lg:bottom-auto lg:top-[50%] -translate-y-[50%] lg:left-10;
+}
+.chevron {
+  @apply fixed -bottom-20 right-[50%] translate-x-[50%] rotate-90 lg:bottom-auto lg:top-[50%] lg:hidden -translate-y-[50%] bg-[#00000065] py-10 px-2 cursor-pointer;
+}
+.testnet {
+  @apply absolute -top-2 z-10 rounded-sm text-red-700 bg-[#FAEDEC] px-2 py-0.5 text-center font-semibold text-[9px];
+}
+.navigationContainer {
+  @apply relative mt-5 flex-1 bg-primary-full-dark-color px-2 py-4 w-56 rounded-xl shadow;
+}
+.whiteicon {
+  @apply w-5 h-5 text-white;
+}
+.devider {
+  @apply w-auto h-[1px] bg-neutral-500 mx-4 my-2;
+}
+.socialIconContainer {
+  @apply flex items-center justify-center  mt-4;
+}
+.socialIcon {
+  @apply text-gray-400 cursor-pointer group-hover:text-gray-300 mr-4 flex-shrink-0 h-4 w-4;
+}
