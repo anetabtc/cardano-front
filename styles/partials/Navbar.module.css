@@ -1,5 +1,5 @@
 .navbar {
-  @apply flex flex-col lg:flex-row justify-between items-center lg:items-start p-4;
+  @apply flex flex-col lg:flex-row justify-between items-center lg:items-start py-4;
 }
 .rightside {
   @apply flex gap-2 flex-wrap justify-center items-center relative;

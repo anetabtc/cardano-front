@@ -1,17 +1,17 @@
 .maincontainer {
-  @apply h-full;
+  @apply h-72 fixed top-[50%] bottom-[50%] -translate-y-[50%] 2xl:top-80;
 }
 .container {
-  @apply fixed w-56 -bottom-20 right-[25%] translate-x-[50%] lg:translate-x-0 lg:bottom-auto lg:top-[50%] -translate-y-[50%] lg:left-10;
+  @apply sticky w-56 top-0;
+}
+.navigationContainer {
+  @apply relative mt-5 flex-1 bg-primary-full-dark-color px-2 py-4 w-56 rounded-xl shadow;
 }
 .chevron {
   @apply fixed -bottom-20 right-[50%] translate-x-[50%] rotate-90 lg:bottom-auto lg:top-[50%] lg:hidden -translate-y-[50%] bg-[#00000065] py-10 px-2 cursor-pointer;
 }
 .testnet {
   @apply absolute -top-2 z-10 rounded-sm text-red-700 bg-[#FAEDEC] px-2 py-0.5 text-center font-semibold text-[9px];
-}
-.navigationContainer {
-  @apply relative mt-5 flex-1 bg-primary-full-dark-color px-2 py-4 w-56 rounded-xl shadow;
 }
 .whiteicon {
   @apply w-5 h-5 text-white;
