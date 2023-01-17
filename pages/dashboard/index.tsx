@@ -6,7 +6,7 @@ import { dashboardInfo } from "../../utils/dashboard";
 
 const Dashboard = () => {
   return (
-    <div className=" mr-28 2xl:mr-0">
+    <div className=" mr-28 2xl:mr-0 mt-12">
       <div className="max-w-4xl 2xl:mx-auto ml-auto grid grid-cols-3 justify-items-center  gap-5 font-nunito-sans">
         {dashboardInfo.map((value, i) => {
           return (

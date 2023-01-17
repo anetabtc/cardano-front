@@ -20,55 +20,57 @@ const WrapUnwrap = () => {
   };
 
   return (
-    <form
-      onSubmit={(e) => {
-        handleSubmit(e);
-      }}
-      className={styles.container}
-    >
-      <div className="flex justify-evenly">
-        {/* switch button  */}
-        <Tab.Group>
-          <Tab.List className={styles.tabList}>
-            {["Wrap", "Unwrap"].map((value: string) => (
-              <Tab
-                key={value}
-                onClick={() => setTabName(value)}
-                className={({ selected }) =>
-                  classNames(
-                    "w-full rounded-lg py-3 text-xs font-semibold leading-5 text-white outline-none",
-                    value == tabName
-                      ? " bg-primary-blue-color shadow"
-                      : "text-blue-100 hover:bg-primary-blue-color/[0.5] hover:text-white"
-                  )
-                }
-              >
-                {value}
-              </Tab>
-            ))}
-          </Tab.List>
-        </Tab.Group>
-      </div>
-      {tabName == "Unwrap" ? (
-        <Unwrap
-          payBridgeModalOpen={payBridgeModalOpen}
-          setPayBridgeModalOpen={setPayBridgeModalOpen}
-          setValidBtcAddress={setValidBtcAddress}
-          validAddress={btcValidAddressFinal}
+    <div className="mt-12">
+      <form
+        onSubmit={(e) => {
+          handleSubmit(e);
+        }}
+        className={styles.container}
+      >
+        <div className="flex justify-evenly">
+          {/* switch button  */}
+          <Tab.Group>
+            <Tab.List className={styles.tabList}>
+              {["Wrap", "Unwrap"].map((value: string) => (
+                <Tab
+                  key={value}
+                  onClick={() => setTabName(value)}
+                  className={({ selected }) =>
+                    classNames(
+                      "w-full rounded-lg py-3 text-xs font-semibold leading-5 text-white outline-none",
+                      value == tabName
+                        ? " bg-primary-blue-color shadow"
+                        : "text-blue-100 hover:bg-primary-blue-color/[0.5] hover:text-white"
+                    )
+                  }
+                >
+                  {value}
+                </Tab>
+              ))}
+            </Tab.List>
+          </Tab.Group>
+        </div>
+        {tabName == "Unwrap" ? (
+          <Unwrap
+            payBridgeModalOpen={payBridgeModalOpen}
+            setPayBridgeModalOpen={setPayBridgeModalOpen}
+            setValidBtcAddress={setValidBtcAddress}
+            validAddress={btcValidAddressFinal}
+          />
+        ) : (
+          <Wrap
+            setValidBtcAddress={setValidBtcAddress}
+            validAddress={btcValidAddressFinal}
+            payBridgeModalOpen={payBridgeModalOpen}
+            setPayBridgeModalOpen={setPayBridgeModalOpen}
+          />
+        )}
+        <InvalidBTCAddressModal
+          isOpen={btcValidAddressFinal == false}
+          setIsOpen={setBtcValidAddressFinal}
         />
-      ) : (
-        <Wrap
-          setValidBtcAddress={setValidBtcAddress}
-          validAddress={btcValidAddressFinal}
-          payBridgeModalOpen={payBridgeModalOpen}
-          setPayBridgeModalOpen={setPayBridgeModalOpen}
-        />
-      )}
-      <InvalidBTCAddressModal
-        isOpen={btcValidAddressFinal == false}
-        setIsOpen={setBtcValidAddressFinal}
-      />
-    </form>
+      </form>
+    </div>
   );
 };
 

@@ -7,7 +7,7 @@ import { transactions } from "../../utils/transactions";
 export default function Transactions() {
   const [tabName, setTabName] = useState<string>("Wrap Requests");
   return (
-    <div className="px-4 flex flex-col items-end 2xl:items-center 2xl:ml-28 font-nunito-sans">
+    <div className="px-4 flex flex-col items-end 2xl:items-center 2xl:ml-28 font-nunito-sans mt-4">
       <div className="flex flex-col justify-center mr-12 2xl:mr-0 ">
         <div className="w-96 my-4 -ml-8">
           <Tab.Group>

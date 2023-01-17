@@ -2,25 +2,26 @@ import Image from "next/image";
 import React, { Fragment, useState } from "react";
 import { Cog8ToothIcon } from "@heroicons/react/24/outline";
 import { Listbox, Transition } from "@headlessui/react";
-import { ChevronDownIcon, CheckIcon } from "@heroicons/react/24/solid";
+import { ChevronDownIcon } from "@heroicons/react/24/solid";
 
 import styles from "../../styles/partials/Navbar.module.css";
 import ConnectWallet from "./navbar/ConnectWallet";
 import LoggedInWallet from "./navbar/LoggedInWallet";
 import Settings from "./navbar/Settings";
+import { BsDot } from "react-icons/bs";
 
-interface Cardano {
+interface Network {
   name: string;
+  image: string;
 }
 
-const cardano: Cardano[] = [
-  { name: "Cardano" },
-  { name: "Ethereum" },
-  { name: "Bitcoin" },
+const network: Network[] = [
+  { name: "Cardano", image: "/images/assets/m.png" },
+  { name: "Ethereum", image: "/images/logo/star.png" },
 ];
 
 const Navbar = () => {
-  const [selectedCardano, setSelectedCardano] = useState(cardano[0]);
+  const [selectedNetwork, setSelectedNetwork] = useState(network[0]);
   const [isWalletShowing, setIsWalletShowing] = useState<boolean>(false);
   const [isSettingShowing, setIsSettingShowing] = useState<boolean>(false);
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
@@ -38,7 +39,7 @@ const Navbar = () => {
       <div className={styles.rightside}>
         <div>
           <div>
-            <Listbox value={selectedCardano} onChange={setSelectedCardano}>
+            <Listbox value={selectedNetwork} onChange={setSelectedNetwork}>
               <div className="relative  bg-black rounded-md">
                 <Listbox.Button className={styles.listBoxButton}>
                   <div>
@@ -50,7 +51,7 @@ const Navbar = () => {
                     />
                     <span style={{ fontSize: "12px" }}>
                       {" "}
-                      {selectedCardano.name}
+                      {selectedNetwork.name}
                     </span>
                   </div>
                   <span className={styles.chevDown}>
@@ -67,36 +68,44 @@ const Navbar = () => {
                   leaveTo="opacity-0"
                 >
                   <Listbox.Options className={styles.listBoxOptions}>
-                    {cardano.map((cardanoValue, cardanoValueIdx) => (
+                    {network.map((networkValue, networkValueIdx) => (
                       <Listbox.Option
-                        key={cardanoValueIdx}
+                        key={networkValueIdx}
                         className={({ active }) =>
-                          `relative cursor-pointer select-none py-2 pl-10 pr-4 ${
-                            active
-                              ? "bg-amber-100 text-amber-900"
-                              : "text-gray-900"
+                          `relative cursor-pointer select-none py-2 pl-4 pr-4 text-xs ${
+                            active ? " text-gray-100" : "text-gray-100"
                           }`
                         }
-                        value={cardanoValue}
+                        value={networkValue}
                       >
                         {({ selected }) => (
-                          <>
+                          <div
+                            className={`flex items-center gap-1 ${
+                              selected ? "opacity-100" : "opacity-80"
+                            }`}
+                          >
+                            <Image
+                              src={networkValue.image}
+                              width={15}
+                              height={15}
+                              alt={networkValue.name}
+                            />
                             <span
                               className={`block truncate ${
                                 selected ? "font-medium" : "font-normal"
                               }`}
                             >
-                              {cardanoValue.name}
+                              {networkValue.name}
                             </span>
                             {selected ? (
                               <span className={styles.selectedCheck}>
-                                <CheckIcon
-                                  className="h-5 w-5"
+                                <BsDot
+                                  className="h-7 w-7 text-green-500"
                                   aria-hidden="true"
                                 />
                               </span>
                             ) : null}
-                          </>
+                          </div>
                         )}
                       </Listbox.Option>
                     ))}

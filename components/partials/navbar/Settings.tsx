@@ -79,15 +79,15 @@ const Settings = ({ isShowing, setIsShowing }: Props) => {
                 leaveFrom="opacity-100"
                 leaveTo="opacity-0"
               >
-                <Listbox.Options className={styles.listBoxOptions}>
+                <Listbox.Options
+                  className={`absolute px-1 cursor-pointer mt-1 max-h-60 w-full overflow-auto rounded-md bg-black py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm`}
+                >
                   {languages.map((lang, langIdx) => (
                     <Listbox.Option
                       key={langIdx}
                       className={({ active }) =>
-                        `relative cursor-default select-none py-2 pl-10 pr-4 ${
-                          active
-                            ? "bg-amber-100 text-amber-900"
-                            : "text-gray-900"
+                        `relative hover:bg-primary-blue-color rounded-lg  cursor-pointer select-none py-2 pl-10 pr-4 ${
+                          active ? "text-gray-100" : "text-gray-100"
                         }`
                       }
                       value={lang}
