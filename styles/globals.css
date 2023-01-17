@@ -46,3 +46,25 @@ input::-webkit-inner-spin-button {
 input[type="number"] {
   -moz-appearance: textfield;
 }
+
+/* scrollbar design  */
+
+/* width */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  @apply bg-transparent rounded-full;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  @apply bg-neutral-600  rounded-full;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

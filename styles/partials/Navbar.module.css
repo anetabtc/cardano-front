@@ -53,7 +53,7 @@
 
 /*Settings components*/
 .settingsContainer {
-  @apply flex flex-col gap-3 absolute z-50 right-[50%] translate-x-[50%] lg:translate-x-0 lg:right-0 top-20 shadow-lg lg:top-14 bg-primary-full-dark-color rounded-lg p-4 w-72;
+  @apply flex flex-col gap-3 absolute z-50 right-[50%] translate-x-[50%] lg:translate-x-0 lg:right-0 top-20 shadow-lg lg:top-14 bg-black rounded-lg p-4 w-72;
 }
 .theme {
   @apply flex justify-between items-center;

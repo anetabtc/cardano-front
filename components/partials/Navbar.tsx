@@ -9,6 +9,7 @@ import ConnectWallet from "./navbar/ConnectWallet";
 import LoggedInWallet from "./navbar/LoggedInWallet";
 import Settings from "./navbar/Settings";
 import { BsDot } from "react-icons/bs";
+import WalletDropdown from "./navbar/WalletDropdown";
 
 interface Network {
   name: string;
@@ -16,8 +17,8 @@ interface Network {
 }
 
 const network: Network[] = [
-  { name: "Cardano", image: "/images/assets/m.png" },
-  { name: "Ethereum", image: "/images/logo/star.png" },
+  { name: "Cardano", image: "/images/logo/star.png" },
+  { name: "Ethereum", image: "/images/assets/m.png" },
 ];
 
 const Navbar = () => {
@@ -45,7 +46,7 @@ const Navbar = () => {
                   <div>
                     <Image
                       alt="a star icon"
-                      src={"/images/logo/star.png"}
+                      src={selectedNetwork.image}
                       height={20}
                       width={20}
                     />
@@ -135,6 +136,7 @@ const Navbar = () => {
           setIsLoggedIn={setIsLoggedIn}
           isLoggedIn={isLoggedIn}
         />
+
         <button
           onClick={() =>
             isSettingShowing

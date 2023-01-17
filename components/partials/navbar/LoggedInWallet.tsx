@@ -1,25 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "../../../styles/partials/Navbar.module.css";
 import Image from "next/image";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
+import WalletDropdown from "./WalletDropdown";
 const LoggedInWallet = () => {
+  const [walletDropDownShowing, setWalletDropDownShowing] = useState(false);
+
   return (
-    <div className={styles.loggedWallet}>
-      <p>1,600.63 ₳</p>
-      <div className="flex items-center">
-        <Image
-          src={"/images/wallet/wallet-2.png"}
-          alt="Wallet image"
-          width={20}
-          height={20}
-          className="mx-2"
-        />
-        <p className="flex items-center justify-between ">
-          addr1...4lyn3h
-          <ChevronDownIcon className="w-3 h-3 text-white ml-1" />
-        </p>
+    <>
+      <div className={styles.loggedWallet}>
+        <p>1,600.63 ₳</p>
+        <div className="flex items-center">
+          <Image
+            src={"/images/wallet/wallet-2.png"}
+            alt="Wallet image"
+            width={20}
+            height={20}
+            className="mx-2"
+          />
+          <p
+            onClick={() => setWalletDropDownShowing(true)}
+            className="flex cursor-pointer items-center justify-between "
+          >
+            addr1...4lyn3h
+            <ChevronDownIcon className="w-3 h-3 text-white ml-1" />
+          </p>
+        </div>
       </div>
-    </div>
+      <div className="text-xs">
+        <WalletDropdown
+          isShowing={walletDropDownShowing}
+          setIsShowing={setWalletDropDownShowing}
+        />
+      </div>
+    </>
   );
 };
 
