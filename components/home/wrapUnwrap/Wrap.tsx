@@ -76,10 +76,7 @@ const Wrap = ({
       {/* source address  */}
 
       <div>
-        <label
-          className="text-xs text-gray-100 flex items-center gap-1"
-          htmlFor="btc-address"
-        >
+        <label className="text-xs text-gray-100 " htmlFor="btc-address">
           BTC Source Address{" "}
         </label>
         <input
@@ -151,19 +148,7 @@ const Wrap = ({
             {amount && <p className="text-[13px] text-right mt-1">= $ 0.8</p>}
           </div>
         </div>
-        {/* final button  */}
-        {amount ? (
-          <button
-            onClick={() => setPayBridgeModalOpen(true)}
-            className={styles.wrapBtc}
-          >
-            Wrap BTC
-          </button>
-        ) : (
-          <button disabled={true} className={styles.enterAmountBtc}>
-            Enter an amount
-          </button>
-        )}
+
         {validate(btcAddress) && (
           <PayBridgeFeeModal
             isOpen={payBridgeModalOpen}
@@ -191,6 +176,19 @@ const Wrap = ({
           setBtcDepositOpen={setBtcDepositOpen}
         />
       </div>
+      {/* final button  */}
+      {amount ? (
+        <button
+          onClick={() => setPayBridgeModalOpen(true)}
+          className={styles.wrapBtc}
+        >
+          Wrap BTC
+        </button>
+      ) : (
+        <button disabled={true} className={styles.enterAmountBtc}>
+          Enter an amount
+        </button>
+      )}
     </Fragment>
   );
 };

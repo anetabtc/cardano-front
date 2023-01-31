@@ -18,7 +18,7 @@ interface Network {
 
 const network: Network[] = [
   { name: "Cardano", image: "/images/logo/star.png" },
-  { name: "Ethereum", image: "/images/assets/m.png" },
+  { name: "Ergo", image: "/images/assets/m.png" },
 ];
 
 const Navbar = () => {
@@ -73,7 +73,7 @@ const Navbar = () => {
                       <Listbox.Option
                         key={networkValueIdx}
                         className={({ active }) =>
-                          `relative cursor-pointer select-none py-2 pl-4 pr-4 text-xs ${
+                          `relative cursor-pointer uppercase select-none py-2 pl-4 pr-4 text-xs ${
                             active ? " text-gray-100" : "text-gray-100"
                           }`
                         }
@@ -117,7 +117,7 @@ const Navbar = () => {
           </div>
         </div>
         {isLoggedIn ? (
-          <LoggedInWallet />
+          <LoggedInWallet setDisconnect={setIsLoggedIn} />
         ) : (
           <button
             onClick={() =>

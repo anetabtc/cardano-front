@@ -137,20 +137,6 @@ const Unwrap = ({
           </div>
         </div>
 
-        {/* final button  */}
-
-        {amount ? (
-          <button
-            onClick={() => setPayBridgeModalOpen(true)}
-            className={styles.wrapBtc}
-          >
-            Unwrap cBTC
-          </button>
-        ) : (
-          <button disabled={true} className={styles.enterAmountBtc}>
-            Insufficient cBTC balance
-          </button>
-        )}
         {validate(btcAddress) && (
           <ConfirmUnwrap
             isOpen={payBridgeModalOpen}
@@ -177,6 +163,20 @@ const Unwrap = ({
         setSuccessNotify={setSuccessNotify}
         successNotify={successNotify}
       />
+      {/* final button  */}
+
+      {amount ? (
+        <button
+          onClick={() => setPayBridgeModalOpen(true)}
+          className={styles.wrapBtc}
+        >
+          Unwrap cBTC
+        </button>
+      ) : (
+        <button disabled={true} className={styles.enterAmountBtc}>
+          Insufficient cBTC balance
+        </button>
+      )}
     </Fragment>
   );
 };

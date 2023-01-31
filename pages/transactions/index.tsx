@@ -62,7 +62,7 @@ export default function Transactions() {
                       scope="col"
                       className="sticky top-0 font-medium z-10 border-b border-gray-300 bg-opacity-75 px-8 py-3.5 text-left text-[12px] text-neutral-200 backdrop-blur backdrop-filter"
                     >
-                      Transaction (Bridge Fee)
+                      Transaction {tabName=="Wrap Requests" ? "(Bridge Fee)" : "(cBtc + ADA)"}
                     </th>
                     <th
                       scope="col"

@@ -7,6 +7,7 @@ import { MdOutlineContentCopy, MdOutlineLogout } from "react-icons/md";
 interface Props {
   isShowing: boolean;
   setIsShowing: (value: boolean) => void;
+  setDisconnect: (value: boolean) => void;
 }
 
 const walletList = [
@@ -48,7 +49,7 @@ const walletList = [
   },
 ];
 
-const WalletDropdown = ({ isShowing, setIsShowing }: Props) => {
+const WalletDropdown = ({ isShowing, setIsShowing, setDisconnect }: Props) => {
   return (
     <Transition
       show={isShowing}
@@ -101,7 +102,10 @@ const WalletDropdown = ({ isShowing, setIsShowing }: Props) => {
           </div>
         ))}
       </div>
-      <button className="flex items-center gap-2 justify-center border-neutral-600 text-neutral-300 border-2 rounded-lg p-2">
+      <button
+        onClick={() => setDisconnect(false)}
+        className="flex items-center gap-2 justify-center border-neutral-600 text-neutral-300 border-2 rounded-lg p-2"
+      >
         <MdOutlineLogout className="w-4 h-4 text-neutral-300" /> Disconnect
       </button>
     </Transition>

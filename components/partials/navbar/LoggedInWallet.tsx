@@ -3,7 +3,7 @@ import styles from "../../../styles/partials/Navbar.module.css";
 import Image from "next/image";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import WalletDropdown from "./WalletDropdown";
-const LoggedInWallet = () => {
+const LoggedInWallet = ({ setDisconnect }: any) => {
   const [walletDropDownShowing, setWalletDropDownShowing] = useState(false);
 
   return (
@@ -16,7 +16,7 @@ const LoggedInWallet = () => {
             alt="Wallet image"
             width={20}
             height={20}
-            className="mx-2"
+            className="mr-1 ml-3"
           />
           <p
             onClick={() => setWalletDropDownShowing(true)}
@@ -29,6 +29,7 @@ const LoggedInWallet = () => {
       </div>
       <div className="text-xs">
         <WalletDropdown
+          setDisconnect={setDisconnect}
           isShowing={walletDropDownShowing}
           setIsShowing={setWalletDropDownShowing}
         />

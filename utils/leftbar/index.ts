@@ -6,6 +6,7 @@ import {
   BsDiscord,
   BsTelegram,
   BsFillGridFill,
+  BsGithub,
 } from "react-icons/bs";
 import { AiOutlineHistory } from "react-icons/ai";
 import { MdFeedback } from "react-icons/md";
@@ -47,7 +48,8 @@ export const navigationLeftbar: NavigationType[] = [
 
 export const socialIconLeftbar = [
   { icon: BsTwitter },
-  { icon: BsFacebook },
-  { icon: BsDiscord },
   { icon: BsTelegram },
+  { icon: BsDiscord },
+  { icon: BsFacebook },
+  { icon: BsGithub },
 ];

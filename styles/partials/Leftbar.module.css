@@ -5,7 +5,7 @@
   @apply sticky w-56 top-0;
 }
 .navigationContainer {
-  @apply relative mt-5 flex-1 bg-primary-full-dark-color px-2 py-4 w-56 rounded-xl shadow;
+  @apply relative mt-5 flex-1 bg-[#141414] px-2 py-4 w-56 rounded-xl shadow;
 }
 .chevron {
   @apply fixed -bottom-20 right-[50%] translate-x-[50%] rotate-90 lg:bottom-auto lg:top-[50%] lg:hidden -translate-y-[50%] bg-[#00000065] py-10 px-2 cursor-pointer;
@@ -20,8 +20,8 @@
   @apply w-auto h-[1px] bg-neutral-500 mx-4 my-2;
 }
 .socialIconContainer {
-  @apply flex items-center justify-center  mt-4;
+  @apply flex items-center justify-center gap-4  mt-4;
 }
 .socialIcon {
-  @apply text-gray-400 cursor-pointer group-hover:text-gray-300 mr-4 flex-shrink-0 h-4 w-4;
+  @apply text-gray-400 cursor-pointer group-hover:text-gray-300 flex-shrink-0 h-4 w-4;
 }

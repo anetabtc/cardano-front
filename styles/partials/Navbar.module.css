@@ -48,7 +48,7 @@
 /*LoggedInWallet components*/
 
 .loggedWallet {
-  @apply cursor-pointer font-medium text-xs bg-black  px-4 py-2 rounded-md flex items-center gap-4 divide-x-2 divide-gray-400;
+  @apply cursor-pointer font-medium text-xs bg-black  px-4 py-2 rounded-md flex items-center gap-4 divide-x divide-gray-700;
 }
 
 /*Settings components*/
