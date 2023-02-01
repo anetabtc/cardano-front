@@ -23,9 +23,6 @@ const ConfirmUnwrap = ({
   const closeModal = () => {
     setIsOpen(false);
   };
-  const openModal = () => {
-    setIsOpen(true);
-  };
 
   const submitFinalData = React.useCallback(() => {
     setTimeout(() => {

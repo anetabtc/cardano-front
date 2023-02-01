@@ -150,7 +150,7 @@ const Unwrap = ({
       {/* success failed notifications  */}
 
       <Notifications
-        success={false}
+        success={true}
         isShow={successNotify}
         setIsShow={setSuccessNotify}
       />

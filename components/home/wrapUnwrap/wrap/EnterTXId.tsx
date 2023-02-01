@@ -5,7 +5,8 @@ import {
 } from "@heroicons/react/24/solid";
 import { XMarkIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect, useState } from "react";
+import ScanningForDeposit from "./ScanningForDeposit";
 
 interface Props {
   isOpen: boolean;
@@ -13,27 +14,22 @@ interface Props {
   setBtcDepositSuccessOpen: (value: boolean) => void;
 }
 
-const ScanningForDeposit = ({
-  isOpen,
-  setIsOpen,
-  setBtcDepositSuccessOpen,
-}: Props) => {
+const EnterTXId = ({ isOpen, setIsOpen, setBtcDepositSuccessOpen }: Props) => {
+  const [txId, setTxId] = useState<string>("");
+  const [isScanningShow, setIsScanningShow] = useState<boolean>(false);
+
   const closeModal = () => {
     setIsOpen(true);
   };
 
-  React.useEffect(() => {
-    setTimeout(() => {
-      if (isOpen) {
-        setBtcDepositSuccessOpen(true);
-        setIsOpen(false);
-      }
-    }, 3000);
-  }, [isOpen]);
   return (
     <>
       <Transition appear show={isOpen} as={Fragment}>
-        <Dialog as="div" className="relative z-20" onClose={closeModal}>
+        <Dialog
+          as="div"
+          className="relative z-20 font-nunito-sans"
+          onClose={closeModal}
+        >
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
@@ -65,31 +61,44 @@ const ScanningForDeposit = ({
                       onClick={() => setIsOpen(false)}
                     />
                     <h3 className="font-semibold text-center font-nunito-sans text-base">
-                      Scanning For Deposit
+                      Enter BTC TX ID
                     </h3>
                   </div>
-                  <div className="flex items-center justify-center">
-                    {/* loader   */}
-                    <div className="w-20 my-8 h-20 border-8 border-b-[#76D572] rounded-full animate-spin border-black" />
+                  <div className="p-3 text-sm font-semibold  text-center text-neutral-300">
+                    Enter the BTC Transaction ID from the BTC deposit
+                    transaction you just submitted.
                   </div>
-                  <div className="p-3 text-xs bg-primary-mid-dark-color rounded-lg flex items-center justify-between text-neutral-300">
-                    <h2>Scanning For</h2>
-                    <div className="flex items-center gap-1 text-sm">
-                      <Image
-                        src={"/images/logo/bitcoin.png"}
-                        width={20}
-                        height={20}
-                        alt="Bitcoin"
-                      />
-                      0.33 BTC
-                    </div>
+                  <div>
+                    <label
+                      className="text-xs text-gray-100 "
+                      htmlFor="btc-address"
+                    >
+                      BTC Transaction ID{" "}
+                    </label>
+                    <input
+                      value={txId}
+                      onChange={(e) => {
+                        setTxId(e.target.value);
+                      }}
+                      type={"text"}
+                      placeholder="Enter TX ID"
+                      className={`w-full text-gray-300 text-sm bg-primary-mid-dark-color p-2.5 rounded-lg outline-none mt-1 placeholder:text-xs`}
+                      required
+                    />
                   </div>
-                  <div className="p-3 font-nunito-sans text-xs bg-primary-mid-dark-color rounded-lg flex flex-col gap-1 tracking-wide text-neutral-300">
-                    <span className=" font-medium">
-                      From BTC Source Address:
-                    </span>
-                    <span>3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5</span>
-                  </div>
+                  <button
+                    onClick={() => setIsScanningShow(true)}
+                    className={
+                      "bg-primary-blue-color hover:bg-primary-blue-color/80  transition-all text-gray-50 w-full text-center p-3 rounded-lg text-base"
+                    }
+                  >
+                    Continue
+                  </button>
+                  <ScanningForDeposit
+                    isOpen={isScanningShow}
+                    setIsOpen={setIsScanningShow}
+                    setBtcDepositSuccessOpen={setBtcDepositSuccessOpen}
+                  />
                 </Dialog.Panel>
               </Transition.Child>
             </div>
@@ -100,4 +109,4 @@ const ScanningForDeposit = ({
   );
 };
 
-export default ScanningForDeposit;
+export default EnterTXId;

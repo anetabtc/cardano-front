@@ -169,12 +169,13 @@ const Wrap = ({
           setIsOpen={setBtcDepositOpen}
           setBtcDepositSuccessOpen={setBtcDepositSuccessOpen}
         />
+
         {/* btc deposit success  */}
-        <BtcDepositReceivedSuccess
+        {/* <BtcDepositReceivedSuccess
           isOpen={btcDepositSuccessOpen}
           setIsOpen={setBtcDepositSuccessOpen}
           setBtcDepositOpen={setBtcDepositOpen}
-        />
+        /> */}
       </div>
       {/* final button  */}
       {amount ? (

@@ -15,7 +15,7 @@ export default function Notifications({ isShow, setIsShow, success }: Props) {
   React.useEffect(() => {
     setTimeout(() => {
       setIsShow(false);
-    }, 8000);
+    }, 6000);
   }, [isShow]);
 
   return (

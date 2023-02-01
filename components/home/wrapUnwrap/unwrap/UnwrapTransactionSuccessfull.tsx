@@ -21,11 +21,8 @@ const UnwrapTransactionSuccessfull = ({
   setSuccessNotify,
   successNotify,
 }: Props) => {
-  const [isWaitingShow, setIsWaitingShow] = React.useState<boolean>(false);
-
   const closeModal = () => {
     setIsOpen(false);
-    setSuccessNotify(false);
   };
 
   return (

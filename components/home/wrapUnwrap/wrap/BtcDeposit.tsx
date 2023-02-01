@@ -2,10 +2,12 @@ import { Dialog, Transition } from "@headlessui/react";
 import { QuestionMarkCircleIcon } from "@heroicons/react/24/outline";
 import { XMarkIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
-import React, { Fragment, useCallback, useEffect } from "react";
+import React, { Fragment, useCallback, useEffect, useState } from "react";
 import WaitingConfirmation from "../WaitingConfirmation";
 import { MdFileCopy } from "react-icons/md";
 import ScanningForDeposit from "./ScanningForDeposit";
+import EnterTXId from "./EnterTXId";
+import BtcDepositReceivedSuccess from "./BtcDepositReceivedSuccess";
 
 interface Props {
   isOpen: boolean;
@@ -13,22 +15,32 @@ interface Props {
   setBtcDepositSuccessOpen: (value: boolean) => void;
 }
 
-const BtcDeposit = ({ isOpen, setIsOpen, setBtcDepositSuccessOpen }: Props) => {
-  const [isScanningShow, setIsScanningShow] = React.useState<boolean>(false);
+const BtcDeposit = ({ isOpen, setIsOpen }: Props) => {
+  const [viewAddress, setViewAddress] = useState<boolean>(false);
+  const [addErgAddress, setAddErgAddress] = useState(false);
+  const [showTxId, setShowTxId] = useState(false);
+  const [showScanning, setShowScanning] = useState(false);
+  const [btcDepositSuccessOpen, setBtcDepositSuccessOpen] =
+    useState<boolean>(false);
 
   const closeModal = () => {
     setIsOpen(false);
-    setBtcDepositSuccessOpen(false);
+    setTimeout(() => {
+      setViewAddress(false);
+      setAddErgAddress(false);
+      setBtcDepositSuccessOpen(false);
+    }, 1000);
   };
 
-  useEffect(() => {
-    if (isScanningShow) {
-      setTimeout(() => {
-        setIsScanningShow(false);
-        setBtcDepositSuccessOpen(true);
-      }, 3000);
-    }
-  }, [isScanningShow]);
+  // useEffect(() => {
+  //   if (isScanningShow) {
+  //     setTimeout(() => {
+  //       setIsScanningShow(false);
+  //       setBtcDepositSuccessOpen(true);
+  //     }, 3000);
+  //   }
+  // }, [isScanningShow]);
+
   return (
     <Transition appear show={isOpen} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={closeModal}>
@@ -56,7 +68,11 @@ const BtcDeposit = ({ isOpen, setIsOpen, setBtcDepositSuccessOpen }: Props) => {
               leaveTo="opacity-0 scale-95"
             >
               <Dialog.Panel className="w-full max-w-lg transform overflow-hidden rounded-2xl border border-neutral-800 bg-primary-full-dark-color  text-left align-middle shadow-xl transition-all">
-                <h3 className="bg-black/[0.5] font-semibold font-nunito-sans text-base text-center p-4 flex items-center gap-2 justify-center">
+                <h3
+                  className={`${
+                    !addErgAddress && "blur-[2px]"
+                  } bg-black/[0.5] font-semibold font-nunito-sans text-base text-center p-4 flex items-center gap-2 justify-center`}
+                >
                   <Image
                     alt="BTC"
                     width={25}
@@ -65,50 +81,109 @@ const BtcDeposit = ({ isOpen, setIsOpen, setBtcDepositSuccessOpen }: Props) => {
                   />
                   BTC Deposit
                 </h3>
-                <div className="p-6">
+                <div className="px-4 py-4">
                   <div className="flex flex-col items-center justify-center gap-4">
-                    <p className="text-base font-nunito-sans">Send 0.33 BTC</p>
+                    <p
+                      className={`${
+                        !addErgAddress && "blur-[2px]"
+                      } text-base text-center font-nunito-sans`}
+                    >
+                      <p>Using Moonshine Wallet,</p>
+                      Send 0.33 BTC
+                    </p>
                     <div className="flex flex-col items-center text-xs text-neutral-200 gap-2 font-nunito-sans font-light tracking-wide">
-                      <p className=" text-xs">In a single transaction to:</p>
-                      <div className="text-sm py-2 px-8 border border-neutral-400 rounded-lg flex items-center gap-1">
-                        <p>tb1q03i4ngjso93ld8ehtksnf5mndlds8rndnmqoe</p>
+                      <p
+                        className={`${!addErgAddress && "blur-[2px]"} text-xs`}
+                      >
+                        In a single transaction to:
+                      </p>
+                      <div
+                        className={`${
+                          !addErgAddress && "blur-[2px]"
+                        } w-full text-sm py-0.5 px-8 border border-neutral-400 rounded-lg flex items-center gap-1`}
+                      >
+                        {viewAddress ? (
+                          <p className="py-2">
+                            tb1q03i4ngjso93ld8ehtksnf5mndlds8rndnmqoe
+                          </p>
+                        ) : (
+                          <button
+                            onClick={() => setViewAddress(true)}
+                            className="bg-[#F7931A] hover:bg-[#F7931A]/80  transition-all px-6 py-2  text-xs mx-auto rounded-md "
+                          >
+                            View Address
+                          </button>
+                        )}
                         <MdFileCopy className="w-4 h-4 text-neutral-500" />
                       </div>
-                      <p>
+                      <p className={`${!addErgAddress && "blur-[2px]"}`}>
                         Within{" "}
                         <span className=" font-semibold">0 Days 23:59:33</span>
                       </p>
-                      <p className="max-w-[342px] text-center my-6">
-                        <span className="font-semibold">Attention:</span> Some
-                        Bitcoin wallets display values in mBTC. In this case,
-                        ensure you send the correct amount:{" "}
-                        <span className="font-semibold">333mBTC</span>
-                      </p>
+                      <div className="max-w-[342px] text-center my-2 space-y-4">
+                        <h2 className="font-bold text-xl text-[#F7931A]">
+                          Attention:
+                        </h2>
+                        <p>
+                          <span className="text-[#F7931A] font-bold">
+                            Add your ERG address
+                          </span>{" "}
+                          in the “Message (Optional)” section in your Moonshine
+                          Wallet before sending this deposit.
+                        </p>
+                        <p>
+                          This ERG address will receive eBTC. If you do not add
+                          your ERG address into the message section of this
+                          transaction, you will not receive eBTC.
+                        </p>
+                      </div>
                       <div>
                         <Image
                           src={"/images/assets/qrcode.png"}
                           alt="Qr code Scanner"
                           height={144}
                           width={144}
+                          className={`${!viewAddress && "blur-[2px]"}`}
                         />
                       </div>
-                      <p className=" max-w-[280px] text-center my-6">
+                      <p
+                        className={`${
+                          !addErgAddress && "blur-[2px]"
+                        } max-w-[280px] text-center my-2`}
+                      >
                         <b className=" font-semibold">Note:</b> Payments may
                         take over 10 minutes to confirm. Don’t worry, your funds
                         are safu :)
                       </p>
-                      <button
-                        onClick={() => setIsScanningShow(true)}
-                        className={
-                          "bg-primary-blue-color text-gray-50 w-full text-center p-3 rounded-lg text-base"
-                        }
-                      >
-                        I have sent the deposit
-                      </button>
+                      {addErgAddress ? (
+                        <button
+                          onClick={() => setShowTxId(true)}
+                          className={
+                            "bg-primary-blue-color hover:bg-primary-blue-color/80 transition-all text-gray-50 w-full text-center p-3 rounded-lg text-base"
+                          }
+                        >
+                          I have sent the deposit
+                        </button>
+                      ) : (
+                        <button
+                          onClick={() => setAddErgAddress(true)}
+                          className={
+                            "bg-primary-blue-color hover:bg-primary-blue-color/80  transition-all text-gray-50 w-full text-center p-3 rounded-lg text-base"
+                          }
+                        >
+                          I will add my ERG address
+                        </button>
+                      )}
                     </div>
-                    <ScanningForDeposit
-                      isOpen={isScanningShow}
-                      setIsOpen={setIsScanningShow}
+                    <EnterTXId
+                      setIsOpen={setShowTxId}
+                      isOpen={showTxId}
+                      setBtcDepositSuccessOpen={setBtcDepositSuccessOpen}
+                    />
+                    <BtcDepositReceivedSuccess
+                      isOpen={btcDepositSuccessOpen}
+                      setIsOpen={setBtcDepositSuccessOpen}
+                      // setBtcDepositOpen={setBtcDepositOpen}
                     />
                   </div>
                 </div>

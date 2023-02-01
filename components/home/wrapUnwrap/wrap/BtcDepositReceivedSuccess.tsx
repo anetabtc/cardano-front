@@ -12,22 +12,16 @@ import { BsCheck2 } from "react-icons/bs";
 interface Props {
   isOpen: boolean;
   setIsOpen: (value: boolean) => void;
-  setBtcDepositOpen: (value: boolean) => void;
 }
 
-const BtcDepositReceivedSuccess = ({
-  isOpen,
-  setIsOpen,
-  setBtcDepositOpen,
-}: Props) => {
+const BtcDepositReceivedSuccess = ({ isOpen, setIsOpen }: Props) => {
   const closeModal = () => {
     setIsOpen(false);
-    setBtcDepositOpen(false);
   };
 
   return (
     <Transition appear show={isOpen} as={Fragment}>
-      <Dialog as="div" className="relative z-10" onClose={closeModal}>
+      <Dialog as="div" className="relative z-20" onClose={closeModal}>
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"
