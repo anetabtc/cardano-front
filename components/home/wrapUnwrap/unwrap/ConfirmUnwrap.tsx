@@ -144,10 +144,10 @@ const ConfirmUnwrap = ({
                       setIsWaitingShow(true);
                     }}
                     className={
-                      "bg-primary-blue-color text-gray-50 w-full text-center p-3 rounded-lg text-sm"
+                      "bg-primary-blue-color font-semibold font-nunito-sans text-gray-50 w-full text-center p-3 rounded-lg text-sm"
                     }
                   >
-                    Pay Bridge Fee
+                    Confirm Unwrap
                   </button>
                   <WaitingConfirmation
                     isOpen={isWaitingShow}

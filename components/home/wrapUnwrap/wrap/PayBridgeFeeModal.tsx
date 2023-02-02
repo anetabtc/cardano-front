@@ -137,7 +137,7 @@ const PayBridgeFeeModal = ({
                       setIsWaitingShow(true);
                     }}
                     className={
-                      "bg-primary-blue-color text-gray-50 w-full text-center p-3 rounded-lg text-sm"
+                      "bg-primary-blue-color font-nunito-sans font-semibold text-gray-50 w-full text-center p-3 rounded-lg text-sm"
                     }
                   >
                     Pay Bridge Fee

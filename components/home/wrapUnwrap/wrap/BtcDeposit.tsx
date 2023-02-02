@@ -40,7 +40,7 @@ const BtcDeposit = ({ isOpen, setIsOpen, closeAllModal }: Props) => {
 
   return (
     <Transition appear show={isOpen} as={Fragment}>
-      <Dialog as="div" className="relative z-10" onClose={closeModal}>
+      <Dialog as="div" className="relative z-10 w-full" onClose={closeModal}>
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"
@@ -78,8 +78,8 @@ const BtcDeposit = ({ isOpen, setIsOpen, closeAllModal }: Props) => {
                   />
                   BTC Deposit
                 </h3>
-                <div className="px-4 py-4">
-                  <div className="flex flex-col items-center justify-center gap-4">
+                <div className="px-4 py-4 w-full">
+                  <div className="flex flex-col items-center justify-center gap-4 w-full">
                     <p
                       className={`${
                         !addErgAddress && "blur-[2px]"
@@ -88,7 +88,7 @@ const BtcDeposit = ({ isOpen, setIsOpen, closeAllModal }: Props) => {
                       <p>Using Moonshine Wallet,</p>
                       Send 0.33 BTC
                     </p>
-                    <div className="flex flex-col items-center text-xs text-neutral-200 gap-2 font-nunito-sans font-light tracking-wide">
+                    <div className="w-full flex flex-col items-center text-xs text-neutral-200 gap-2 font-nunito-sans font-light tracking-wide">
                       <p
                         className={`${!addErgAddress && "blur-[2px]"} text-xs`}
                       >
@@ -156,7 +156,7 @@ const BtcDeposit = ({ isOpen, setIsOpen, closeAllModal }: Props) => {
                         <button
                           onClick={() => setShowTxId(true)}
                           className={
-                            "bg-primary-blue-color hover:bg-primary-blue-color/80 transition-all text-gray-50 w-full text-center p-3 rounded-lg text-base"
+                            "bg-primary-blue-color font-nunito-sans font-semibold hover:bg-primary-blue-color/80 transition-all text-gray-50 w-full text-center p-3 rounded-lg text-sm"
                           }
                         >
                           I have sent the deposit
@@ -165,7 +165,7 @@ const BtcDeposit = ({ isOpen, setIsOpen, closeAllModal }: Props) => {
                         <button
                           onClick={() => setAddErgAddress(true)}
                           className={
-                            "bg-primary-blue-color hover:bg-primary-blue-color/80  transition-all text-gray-50 w-full text-center p-3 rounded-lg text-base"
+                            "bg-primary-blue-color font-nunito-sans font-semibold hover:bg-primary-blue-color/80  transition-all text-gray-50 w-full text-center p-3 rounded-lg text-sm"
                           }
                         >
                           I will add my ERG address

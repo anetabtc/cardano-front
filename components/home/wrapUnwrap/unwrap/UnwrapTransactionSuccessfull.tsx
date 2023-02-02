@@ -105,54 +105,34 @@ const UnwrapTransactionSuccessfull = ({
                     BTC will be sent to your BTC wallet shortly This may take up
                     to 24 hours. Don’t worry, your funds are safu {":)"}
                   </p>
-                  {/* bridge fee and btc address  */}
-                  {/* bridge fee */}
-                  <div className="rounded-lg p-4 bg-primary-mid-dark-color font-nunito-sans text-xs space-y-2">
-                    <div className=" font-medium flex justify-between">
-                      <h4 className="flex gap-1 items-center font-bold">
-                        Bridge Fee:
-                        <QuestionMarkCircleIcon className="w-4 h-4 text-neutral-600" />
-                      </h4>
-                      <p className="font-bold">45 ₳</p>
-                    </div>
-                    <div className="text-xs justify-between flex">
-                      <h4>BTC Network Fee:</h4>
-                      <p>~.000085 ₿ </p>
-                    </div>
-                    <div className="flex justify-between">
-                      <h4 className="flex gap-1 items-center">
-                        Minimum BTC Received:
-                      </h4>
-                      <p>.29903001 ₿ </p>
-                    </div>
-                  </div>
                   {/* btc address */}
                   <div className="rounded-lg p-4 bg-primary-mid-dark-color font-nunito-sans text-xs space-y-1">
                     <div>
                       <h4 className="flex gap-1 items-center">
-                        BTC Source Address:
+                        BTC Destination Address:
                       </h4>
                     </div>
                     <p className=" text-neutral-300">
                       3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5
                     </p>
                   </div>
-                  <p className="text-[11px] text-neutral-300 font-nunito-sans text-center mt-2">
-                    Your unique anetaBTC ID for this entire transaction is:{" "}
-                    <h4 className="text-[11px] text-neutral-200 font-semibold text-center mt-1">
-                      0qcJoaaDhKrF47bfP03r
-                    </h4>
+
+                  <p className="text-xs text-neutral-300 font-nunito-sans text-center leading-relaxed max-w-[320px] mx-auto">
+                    The status and details of this transaction can be found in
+                    the “Transactions” tab on the side menu.
                   </p>
-                  <p className="text-xs text-neutral-300 font-nunito-sans text-center mb-2 leading-relaxed max-w-[300px] mx-auto">
-                    This unique ID is also available in your Transactions tab.
-                    If you need support, this ID will help us assist you.
-                  </p>
+
+                  <div className="rounded-lg text-center p-4 bg-primary-mid-dark-color font-nunito-sans text-xs space-y-1">
+                    <h3 className="font-semibold text-[13px] mb-3">Support</h3>
+                    If you need support, your BTC transaction ID and your ERG
+                    transaction ID will help us assist you.
+                  </div>
                   <button
                     onClick={() => {
                       closeModal();
                     }}
                     className={
-                      "bg-primary-blue-color text-gray-50 w-full text-center p-3 rounded-lg text-sm"
+                      "bg-primary-blue-color font-nunito-sans font-semibold text-gray-50 w-full text-center p-3 rounded-lg text-sm"
                     }
                   >
                     Close

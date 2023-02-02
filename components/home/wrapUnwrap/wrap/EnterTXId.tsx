@@ -94,7 +94,7 @@ const EnterTXId = ({ isOpen, setIsOpen, setBtcDepositSuccessOpen }: Props) => {
                       }, 2000);
                     }}
                     className={
-                      "bg-primary-blue-color hover:bg-primary-blue-color/80  transition-all text-gray-50 w-full text-center p-3 rounded-lg text-base"
+                      "bg-primary-blue-color hover:bg-primary-blue-color/80  transition-all text-gray-50 w-full text-center p-3 rounded-lg text-sm font-semibold"
                     }
                   >
                     Continue
