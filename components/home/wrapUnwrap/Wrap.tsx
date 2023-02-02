@@ -26,11 +26,15 @@ const Wrap = ({
   const [btcDepositOpen, setBtcDepositOpen] = useState<boolean>(false);
   const [btcDepositSuccessOpen, setBtcDepositSuccessOpen] =
     useState<boolean>(false);
-
   const [amount, setAmount] = useState<
     string | number | readonly string[] | undefined
   >();
 
+  const closeAllModal = () => {
+    setSuccessNotify(false);
+    setBtcDepositOpen(false);
+    setBtcDepositSuccessOpen(false);
+  };
   // when notification appear, the loading and popup will disable
 
   React.useEffect(() => {
@@ -168,6 +172,7 @@ const Wrap = ({
           isOpen={btcDepositOpen}
           setIsOpen={setBtcDepositOpen}
           setBtcDepositSuccessOpen={setBtcDepositSuccessOpen}
+          closeAllModal={closeAllModal}
         />
 
         {/* btc deposit success  */}

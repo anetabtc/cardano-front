@@ -1,11 +1,7 @@
 import { Dialog, Transition } from "@headlessui/react";
-import { QuestionMarkCircleIcon } from "@heroicons/react/24/outline";
-import { XMarkIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
 import React, { Fragment, useCallback, useEffect, useState } from "react";
-import WaitingConfirmation from "../WaitingConfirmation";
 import { MdFileCopy } from "react-icons/md";
-import ScanningForDeposit from "./ScanningForDeposit";
 import EnterTXId from "./EnterTXId";
 import BtcDepositReceivedSuccess from "./BtcDepositReceivedSuccess";
 
@@ -13,9 +9,10 @@ interface Props {
   isOpen: boolean;
   setIsOpen: (value: boolean) => void;
   setBtcDepositSuccessOpen: (value: boolean) => void;
+  closeAllModal: any;
 }
 
-const BtcDeposit = ({ isOpen, setIsOpen }: Props) => {
+const BtcDeposit = ({ isOpen, setIsOpen, closeAllModal }: Props) => {
   const [viewAddress, setViewAddress] = useState<boolean>(false);
   const [addErgAddress, setAddErgAddress] = useState(false);
   const [showTxId, setShowTxId] = useState(false);
@@ -67,7 +64,7 @@ const BtcDeposit = ({ isOpen, setIsOpen }: Props) => {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="w-full max-w-lg transform overflow-hidden rounded-2xl border border-neutral-800 bg-primary-full-dark-color  text-left align-middle shadow-xl transition-all">
+              <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl border border-neutral-800 bg-primary-full-dark-color  text-left align-middle shadow-xl transition-all">
                 <h3
                   className={`${
                     !addErgAddress && "blur-[2px]"
@@ -183,6 +180,7 @@ const BtcDeposit = ({ isOpen, setIsOpen }: Props) => {
                     <BtcDepositReceivedSuccess
                       isOpen={btcDepositSuccessOpen}
                       setIsOpen={setBtcDepositSuccessOpen}
+                      closeAllModal={closeAllModal}
                       // setBtcDepositOpen={setBtcDepositOpen}
                     />
                   </div>
