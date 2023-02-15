@@ -1,6 +1,5 @@
 import { Tab } from "@headlessui/react";
 import React, { useState } from "react";
-import { validate } from "bitcoin-address-validation";
 import { classNames } from "../../utils/Classnames";
 import styles from "../../styles/home/WrapUnwrap.module.css";
 import Wrap from "./wrapUnwrap/Wrap";

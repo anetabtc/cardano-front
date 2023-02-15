@@ -87,7 +87,7 @@ const Unwrap = ({
       {/* my receive amount  */}
 
       <div className={styles.receiveAmountContainer}>
-        <p className="text-base">You Will Receive</p>
+        <p className="text-sm font-semibold">You Will Receive</p>
         <div>
           <div className="flex items-center gap-2 text-lg">
             <Image
@@ -97,7 +97,7 @@ const Unwrap = ({
               width={25}
             />
             <p className=" opacity-80">~ 0.299915</p>
-            <h2 className="font-medium font-nunito-sans">eBTC</h2>
+            <h2 className="font-medium font-nunito-sans">BTC</h2>
           </div>
           {amount && <p className={styles.totalEbtc}>= $ 5157.70</p>}
         </div>
@@ -107,7 +107,7 @@ const Unwrap = ({
 
       <div className={styles.bridgeFee}>
         <div className="flex items-center justify-between">
-          <h3>Bridge Fee</h3>
+          <h3>Bridge Fee (0.5%)</h3>
           <div>
             <div className="flex items-center gap-2">
               <Image

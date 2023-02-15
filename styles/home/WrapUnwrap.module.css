@@ -14,16 +14,16 @@
   @apply text-3xl w-full text-gray-200 bg-primary-mid-dark-color py-6 pl-6 pr-28  rounded-2xl  outline-none;
 }
 .btcAddressInput {
-  @apply w-full text-gray-300 text-sm bg-primary-mid-dark-color p-2.5 rounded-lg outline-none mt-1 placeholder:text-xs;
+  @apply w-full text-gray-300 text-sm bg-primary-mid-dark-color py-2.5 pl-[0.4rem] pr-2.5 rounded-lg outline-none mt-1 placeholder:text-xs;
 }
 .receiveAmountContainer {
-  @apply flex items-center justify-between px-6 py-2;
+  @apply flex items-center justify-between px-2 py-2;
 }
 .totalEbtc {
   @apply text-right text-[13px] font-normal text-gray-200;
 }
 .bridgeFee {
-  @apply bg-primary-mid-dark-color text-sm text-gray-300 flex flex-col gap-4 p-4 rounded-lg;
+  @apply bg-primary-mid-dark-color text-sm text-gray-300 flex flex-col gap-4 py-4 px-2 rounded-lg;
 }
 .wrapBtc {
   @apply bg-primary-blue-color hover:bg-primary-blue-color/80 transition-all  font-semibold font-nunito-sans text-gray-50 w-full text-center p-3 rounded-lg text-base;

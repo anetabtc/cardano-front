@@ -70,7 +70,7 @@ const Wrap = ({ payBridgeModalOpen, setPayBridgeModalOpen }: Props) => {
       {/* my receive amount  */}
 
       <div className={styles.receiveAmountContainer}>
-        <p className="text-base">You Will Receive</p>
+        <p className="text-sm font-semibold">You Will Receive</p>
         <div>
           <div className="flex items-center gap-2 text-lg">
             <Image
