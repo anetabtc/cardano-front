@@ -1,8 +1,10 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/solid";
-import React, { Fragment } from "react";
 import Image from "next/image";
+import { Fragment, useEffect } from "react";
+import useCardanoWallet from "../../../hooks/useCardanoWallet";
 import styles from "../../../styles/partials/Navbar.module.css";
+import { CardanoWallet } from "../../../types/cardano";
 interface Props {
   isOpen: boolean;
   setIsOpen: (value: boolean) => void;
@@ -16,10 +18,18 @@ const ConnectWallet = ({
   isLoggedIn,
   setIsLoggedIn,
 }: Props) => {
-  const handleLogin = () => {
+  const { cardanoWallets, connectWallet, cardanoWalletApi } =
+    useCardanoWallet();
+
+  const handleConnectWallet = (cardanoWallet: CardanoWallet) => {
     setIsOpen(false);
-    setIsLoggedIn(true);
+    connectWallet(cardanoWallet);
   };
+
+  /** example of using cardano wallet api */
+  useEffect(() => {
+    console.log(cardanoWalletApi);
+  }, [cardanoWalletApi]);
 
   return (
     <Transition appear show={isOpen} as={Fragment}>
@@ -64,23 +74,21 @@ const ConnectWallet = ({
                     />
                   </div>
                   <div className="border border-gray-500 rounded-lg mt-4 divide-y-[1px] divide-gray-500">
-                    {["Nami", "Eternl", "GeroWallet"].map(
-                      (val: string, i: number) => (
-                        <button
-                          key={val}
-                          onClick={handleLogin}
-                          className="flex first:rounded-t-lg last:rounded-b-lg items-center justify-between p-4 w-full hover:bg-[#25345A]"
-                        >
-                          <p className=" font-light">{val}</p>
-                          <Image
-                            src={`/images/wallet/wallet-${i + 1}.png`}
-                            alt={val}
-                            height={30}
-                            width={30}
-                          />
-                        </button>
-                      )
-                    )}
+                    {cardanoWallets.map((wallet: CardanoWallet, i: number) => (
+                      <button
+                        key={i}
+                        onClick={() => handleConnectWallet(wallet)}
+                        className="flex first:rounded-t-lg last:rounded-b-lg items-center justify-between p-4 w-full hover:bg-[#25345A]"
+                      >
+                        <p className=" font-light">{wallet.name}</p>
+                        <Image
+                          src={wallet.icon}
+                          alt={wallet.name}
+                          height={30}
+                          width={30}
+                        />
+                      </button>
+                    ))}
                   </div>
                 </div>
               </Dialog.Panel>
