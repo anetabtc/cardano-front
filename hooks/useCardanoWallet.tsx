@@ -17,7 +17,8 @@ export default function useCardanoWallet() {
   useEffect(() => {
     const cardano = window.cardano;
     if (cardano == null) {
-      throw new Error("No Cardano wallet found!");
+      // throw new Error("No Cardano wallet found!");
+      return alert("No cardano wallet found!");
     }
     setCardanoWallets(CARDANO_WALLETS.map((walletKey) => cardano[walletKey]));
   }, []);
