@@ -128,7 +128,7 @@ const BtcDepositReceivedSuccess = ({
                       closeAllModal();
                     }}
                     className={
-                      "bg-primary-blue-color text-gray-50 w-full text-center p-3 rounded-lg text-sm font-semibold font-nunito-sans"
+                      "bg-primary-blue-color hover:bg-primary-blue-color/80 transition-all text-gray-50 w-full text-center p-3 rounded-lg text-sm font-semibold font-nunito-sans"
                     }
                   >
                     Close

@@ -132,7 +132,7 @@ const UnwrapTransactionSuccessfull = ({
                       closeModal();
                     }}
                     className={
-                      "bg-primary-blue-color font-nunito-sans font-semibold text-gray-50 w-full text-center p-3 rounded-lg text-sm"
+                      "bg-primary-blue-color hover:bg-primary-blue-color/80 transition-all font-nunito-sans font-semibold text-gray-50 w-full text-center p-3 rounded-lg text-sm"
                     }
                   >
                     Close

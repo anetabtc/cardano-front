@@ -144,7 +144,7 @@ const ConfirmUnwrap = ({
                       setIsWaitingShow(true);
                     }}
                     className={
-                      "bg-primary-blue-color font-semibold font-nunito-sans text-gray-50 w-full text-center p-3 rounded-lg text-sm"
+                      "bg-primary-blue-color hover:bg-primary-blue-color/80  transition-all font-semibold font-nunito-sans text-gray-50 w-full text-center p-3 rounded-lg text-sm"
                     }
                   >
                     Confirm Unwrap
