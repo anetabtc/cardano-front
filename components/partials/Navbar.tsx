@@ -9,7 +9,6 @@ import ConnectWallet from "./navbar/ConnectWallet";
 import LoggedInWallet from "./navbar/LoggedInWallet";
 import Settings from "./navbar/Settings";
 import { BsDot } from "react-icons/bs";
-import WalletDropdown from "./navbar/WalletDropdown";
 
 interface Network {
   name: string;
@@ -41,7 +40,7 @@ const Navbar = () => {
         <div>
           <div>
             <Listbox value={selectedNetwork} onChange={setSelectedNetwork}>
-              <div className="relative  bg-black rounded-md">
+              <div className="relative  bg-black rounded-md ">
                 <Listbox.Button className={styles.listBoxButton}>
                   <div>
                     <Image
@@ -68,7 +67,12 @@ const Navbar = () => {
                   leaveFrom="opacity-100"
                   leaveTo="opacity-0"
                 >
-                  <Listbox.Options className={styles.listBoxOptions}>
+                  <Listbox.Options
+                    className={styles.listBoxOptions + " min-w-[10rem]"}
+                  >
+                    <h3 className=" text-xs px-4 py-2 font-medium">
+                      Select Network
+                    </h3>
                     {network.map((networkValue, networkValueIdx) => (
                       <Listbox.Option
                         key={networkValueIdx}
