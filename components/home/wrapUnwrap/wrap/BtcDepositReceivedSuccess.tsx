@@ -101,7 +101,7 @@ const BtcDepositReceivedSuccess = ({
                     deposit is confirmed. This process may take up to 24 hours.
                   </p>
                   {/* btc address */}
-                  <div className="rounded-lg p-4 bg-primary-mid-dark-color font-nunito-sans text-xs space-y-1">
+                  {/* <div className="rounded-lg p-4 bg-primary-mid-dark-color font-nunito-sans text-xs space-y-1">
                     <div>
                       <h4 className="flex gap-1 items-center">
                         cBTC Destination Address:
@@ -110,7 +110,7 @@ const BtcDepositReceivedSuccess = ({
                     <p className=" text-neutral-300">
                       3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5
                     </p>
-                  </div>
+                  </div> */}
 
                   <p className="text-xs text-neutral-300 font-nunito-sans text-center leading-relaxed max-w-[320px] mx-auto">
                     The status and details of this transaction can be found in

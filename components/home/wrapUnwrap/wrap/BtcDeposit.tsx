@@ -10,13 +10,13 @@ interface Props {
   setIsOpen: (value: boolean) => void;
   setBtcDepositSuccessOpen: (value: boolean) => void;
   closeAllModal: any;
+  wrap?: boolean;
 }
 
-const BtcDeposit = ({ isOpen, setIsOpen, closeAllModal }: Props) => {
+const BtcDeposit = ({ isOpen, setIsOpen, closeAllModal, wrap }: Props) => {
   const [viewAddress, setViewAddress] = useState<boolean>(false);
   const [addErgAddress, setAddErgAddress] = useState(false);
   const [showTxId, setShowTxId] = useState(false);
-  const [showScanning, setShowScanning] = useState(false);
   const [btcDepositSuccessOpen, setBtcDepositSuccessOpen] =
     useState<boolean>(false);
 
@@ -28,15 +28,6 @@ const BtcDeposit = ({ isOpen, setIsOpen, closeAllModal }: Props) => {
       setBtcDepositSuccessOpen(false);
     }, 1000);
   };
-
-  // useEffect(() => {
-  //   if (isScanningShow) {
-  //     setTimeout(() => {
-  //       setIsScanningShow(false);
-  //       setBtcDepositSuccessOpen(true);
-  //     }, 3000);
-  //   }
-  // }, [isScanningShow]);
 
   return (
     <Transition appear show={isOpen} as={Fragment}>
@@ -154,7 +145,11 @@ const BtcDeposit = ({ isOpen, setIsOpen, closeAllModal }: Props) => {
                       </p>
                       {addErgAddress ? (
                         <button
-                          onClick={() => setShowTxId(true)}
+                          onClick={() =>
+                            wrap
+                              ? setBtcDepositSuccessOpen(true)
+                              : setShowTxId(true)
+                          }
                           className={
                             "bg-primary-blue-color font-nunito-sans font-semibold hover:bg-primary-blue-color/80 transition-all text-gray-50 w-full text-center p-3 rounded-lg text-sm"
                           }
@@ -172,11 +167,6 @@ const BtcDeposit = ({ isOpen, setIsOpen, closeAllModal }: Props) => {
                         </button>
                       )}
                     </div>
-                    <EnterTXId
-                      setIsOpen={setShowTxId}
-                      isOpen={showTxId}
-                      setBtcDepositSuccessOpen={setBtcDepositSuccessOpen}
-                    />
                     <BtcDepositReceivedSuccess
                       isOpen={btcDepositSuccessOpen}
                       setIsOpen={setBtcDepositSuccessOpen}

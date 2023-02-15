@@ -1,12 +1,8 @@
 import Image from "next/image";
 import React, { Fragment, useState } from "react";
 import styles from "../../../styles/home/WrapUnwrap.module.css";
-import PayBridgeFeeModal from "./wrap/PayBridgeFeeModal";
-import { validate } from "bitcoin-address-validation";
 import Notifications from "./Notifications";
 import BtcDeposit from "./wrap/BtcDeposit";
-import BtcDepositReceivedSuccess from "./wrap/BtcDepositReceivedSuccess";
-import { ExclamationCircleIcon } from "@heroicons/react/24/solid";
 
 interface Props {
   payBridgeModalOpen: boolean;
@@ -15,13 +11,7 @@ interface Props {
   validAddress: boolean;
 }
 
-const Wrap = ({
-  payBridgeModalOpen,
-  setPayBridgeModalOpen,
-  setValidBtcAddress,
-  validAddress,
-}: Props) => {
-  const [btcAddress, setBtcAddress] = useState<string>("");
+const Wrap = ({ payBridgeModalOpen, setPayBridgeModalOpen }: Props) => {
   const [successNotify, setSuccessNotify] = useState<boolean>(false);
   const [btcDepositOpen, setBtcDepositOpen] = useState<boolean>(false);
   const [btcDepositSuccessOpen, setBtcDepositSuccessOpen] =
@@ -77,25 +67,6 @@ const Wrap = ({
         </div>
       </div>
 
-      {/* source address  */}
-
-      <div>
-        <label className="text-xs text-gray-100 " htmlFor="btc-address">
-          BTC Source Address{" "}
-        </label>
-        <input
-          value={btcAddress}
-          onChange={(e) => {
-            setValidBtcAddress(validate(e.target.value));
-            setBtcAddress(e.target.value);
-          }}
-          type={"text"}
-          placeholder="Enter your BTC address"
-          className={styles.btcAddressInput}
-          required
-        />
-      </div>
-
       {/* my receive amount  */}
 
       <div className={styles.receiveAmountContainer}>
@@ -123,7 +94,7 @@ const Wrap = ({
 
       <div className={styles.bridgeFee}>
         <div className="flex items-center justify-between">
-          <h4>Bridge Fee</h4>
+          <h4>Bridge Fee (0.5%)</h4>
           <div>
             <div className="flex items-center gap-2">
               <Image
@@ -137,30 +108,6 @@ const Wrap = ({
             {amount && <p className="text-[13px] text-right mt-1">= $ 13.63</p>}
           </div>
         </div>
-        <div className="flex items-center justify-between">
-          <h4>Cardano Network Fee</h4>
-          <div>
-            <div className="flex items-center gap-2">
-              <Image
-                src={"/images/logo/circle-star.png"}
-                alt="Circle star"
-                width={25}
-                height={25}
-              />
-              <p>0.0 ₳</p>
-            </div>
-            {amount && <p className="text-[13px] text-right mt-1">= $ 0.8</p>}
-          </div>
-        </div>
-
-        {validate(btcAddress) && (
-          <PayBridgeFeeModal
-            isOpen={payBridgeModalOpen}
-            setIsOpen={setPayBridgeModalOpen}
-            setSuccessNotify={setSuccessNotify}
-            successNotify={successNotify}
-          />
-        )}
         {/* notification of success  */}
         <Notifications
           success={true}
@@ -173,19 +120,13 @@ const Wrap = ({
           setIsOpen={setBtcDepositOpen}
           setBtcDepositSuccessOpen={setBtcDepositSuccessOpen}
           closeAllModal={closeAllModal}
+          wrap={true}
         />
-
-        {/* btc deposit success  */}
-        {/* <BtcDepositReceivedSuccess
-          isOpen={btcDepositSuccessOpen}
-          setIsOpen={setBtcDepositSuccessOpen}
-          setBtcDepositOpen={setBtcDepositOpen}
-        /> */}
       </div>
       {/* final button  */}
       {amount ? (
         <button
-          onClick={() => setPayBridgeModalOpen(true)}
+          onClick={() => setBtcDepositOpen(true)}
           className={styles.wrapBtc}
         >
           Wrap BTC

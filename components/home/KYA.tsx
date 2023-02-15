@@ -1,6 +1,5 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/solid";
-import { GoPrimitiveDot } from "react-icons/go";
 import React, { Fragment, useEffect, useState } from "react";
 
 interface Props {
