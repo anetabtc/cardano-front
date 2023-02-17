@@ -25,8 +25,7 @@ const Wrap = ({ payBridgeModalOpen, setPayBridgeModalOpen }: Props) => {
     setBtcDepositOpen(false);
     setBtcDepositSuccessOpen(false);
   };
-  // when notification appear, the loading and popup will disable
-
+  
   React.useEffect(() => {
     if (successNotify) {
       setPayBridgeModalOpen(false);

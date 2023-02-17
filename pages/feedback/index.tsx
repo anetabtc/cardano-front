@@ -21,7 +21,7 @@ const Feedback = () => {
   ];
 
   return (
-    <div className="flex items-start mt-[9%] justify-center min-h-[80vh] font-light">
+    <div className="flex items-center justify-center min-h-[100vh] font-light">
       <div className=" bg-primary-full-dark-color rounded-lg p-5 font-nunito-sans flex flex-col gap-3">
         {feedBackUrl.map((val, i) => {
           return (

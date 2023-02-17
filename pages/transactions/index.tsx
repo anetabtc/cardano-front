@@ -7,7 +7,7 @@ import { transactions } from "../../utils/transactions";
 export default function Transactions() {
   const [tabName, setTabName] = useState<string>("Wrap Requests");
   return (
-    <div className="px-4 flex flex-col items-end 2xl:items-center 2xl:ml-28 font-nunito-sans mt-4">
+    <div className="px-4 min-h-[100vh] justify-center flex flex-col items-end 2xl:items-center 2xl:ml-28 font-nunito-sans mt-4">
       <div className="flex flex-col justify-center mr-12 2xl:mr-0 ">
         <div className="w-96 my-4 -ml-8">
           <Tab.Group>
@@ -62,7 +62,10 @@ export default function Transactions() {
                       scope="col"
                       className="sticky top-0 font-medium z-10 border-b border-gray-300 bg-opacity-75 px-8 py-3.5 text-left text-[12px] text-neutral-200 backdrop-blur backdrop-filter"
                     >
-                      Transaction {tabName=="Wrap Requests" ? "(Bridge Fee)" : "(cBtc + ADA)"}
+                      Transaction{" "}
+                      {tabName == "Wrap Requests"
+                        ? "(Bridge Fee)"
+                        : "(cBtc + ADA)"}
                     </th>
                     <th
                       scope="col"

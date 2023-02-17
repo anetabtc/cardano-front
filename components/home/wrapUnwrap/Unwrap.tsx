@@ -106,22 +106,34 @@ const Unwrap = ({
       {/* bridge fee and cardano network fee  */}
 
       <div className={styles.bridgeFee}>
-        <div className="flex items-center justify-between">
-          <h3>Bridge Fee (0.5%)</h3>
+        <div className="flex  justify-between">
+          <h3>Bridge Fee</h3>
           <div>
-            <div className="flex items-center gap-2">
-              <Image
-                src={"/images/logo/circle-star.png"}
-                alt="Circle star"
-                width={25}
-                height={25}
-              />
-              <p>0.0 ₳</p>
+            <div className="flex items-center justify-center gap-3">
+              <div className="flex items-center gap-2">
+                <Image
+                  src={"/images/logo/bitcoin-blue.png"}
+                  alt="Circle star"
+                  width={25}
+                  height={25}
+                />
+                <p>0.005 cBTC</p>
+              </div>
+              <p>+</p>
+              <div className="flex items-center gap-2">
+                <Image
+                  src={"/images/assets/m.png"}
+                  alt="Circle star"
+                  width={25}
+                  height={25}
+                />
+                <p>0.05 ERG</p>
+              </div>
             </div>
             {amount && <p className="text-[13px] text-right mt-1">= $ 13.63</p>}
           </div>
         </div>
-        <div className="flex items-center justify-between">
+        {/* <div className="flex items-center justify-between">
           <h4>BTC Network Fee</h4>
           <div>
             <div className="flex items-center gap-2">
@@ -135,7 +147,7 @@ const Unwrap = ({
             </div>
             {amount && <p className="text-[13px] text-right mt-1">= $ 1.43</p>}
           </div>
-        </div>
+        </div> */}
 
         {validate(btcAddress) && (
           <ConfirmUnwrap

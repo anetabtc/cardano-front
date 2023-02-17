@@ -1,5 +1,5 @@
 .maincontainer {
-  @apply h-72 fixed top-[50%] bottom-[50%] -translate-y-[50%] 2xl:top-80;
+  @apply h-72 fixed top-[50%] bottom-[50%] -translate-y-[50%];
 }
 .container {
   @apply sticky w-56 top-0;

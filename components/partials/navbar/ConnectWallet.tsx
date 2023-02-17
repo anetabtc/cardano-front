@@ -80,13 +80,19 @@ const ConnectWallet = ({
                         onClick={() => handleConnectWallet(wallet)}
                         className="flex first:rounded-t-lg last:rounded-b-lg items-center justify-between p-4 w-full hover:bg-[#25345A]"
                       >
-                        <p className=" font-light">{wallet.name}</p>
-                        <Image
-                          src={wallet.icon}
-                          alt={wallet.name}
-                          height={30}
-                          width={30}
-                        />
+                        {wallet?.name && wallet?.icon ? (
+                          <>
+                            <p className=" font-light">{wallet.name}</p>
+                            <Image
+                              src={wallet.icon}
+                              alt={wallet.name}
+                              height={30}
+                              width={30}
+                            />
+                          </>
+                        ) : (
+                          <p>Please add your wallet name and icon</p>
+                        )}
                       </button>
                     ))}
                   </div>
