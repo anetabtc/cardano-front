@@ -21,6 +21,8 @@ const ConfirmUnwrap = ({
 }: Props) => {
   const [isWaitingShow, setIsWaitingShow] = React.useState<boolean>(false);
   const [buttonLoader, setButtonLoader] = React.useState<boolean>(false);
+  const [showBridgeDetails, setShowBridgeDetails] =
+    React.useState<boolean>(false);
 
   const closeModal = () => {
     setIsOpen(false);
@@ -110,23 +112,28 @@ const ConfirmUnwrap = ({
                   </div>
                   {/* bridge fee and btc address  */}
                   {/* bridge fee */}
-                  <div className="rounded-lg p-4 bg-primary-mid-dark-color font-nunito-sans text-xs space-y-2">
+                  <div className="rounded-lg relative p-4 bg-primary-mid-dark-color font-nunito-sans text-xs space-y-2">
                     <div className=" font-medium flex justify-between">
+                      {showBridgeDetails && (
+                        <div className="bg-[#36435A] absolute -top-24 left-1.5 w-44 rounded-lg p-4">
+                          0.05% of eBTC Quantity Uwrapped + 0.0001 eBTC + 0.05
+                          ERG
+                          <div className="-mt-1 w-10 h-10 bg-[#36435A] absolute mx-auto left-[4rem] rotate-45" />
+                        </div>
+                      )}
                       <h4 className="flex gap-1 items-center font-bold">
                         Bridge Fee:
-                        <QuestionMarkCircleIcon className="w-4 h-4 text-neutral-600" />
+                        <QuestionMarkCircleIcon
+                          onMouseEnter={() => setShowBridgeDetails(true)}
+                          onMouseLeave={() => setShowBridgeDetails(false)}
+                          className="w-4 h-4 text-neutral-200 cursor-pointer"
+                        />
                       </h4>
-                      <p className="font-bold">45 ₳</p>
-                    </div>
-                    <div className="text-xs justify-between flex">
-                      <h4>BTC Network Fee:</h4>
-                      <p>~.000085 ₿ </p>
-                    </div>
-                    <div className="flex justify-between">
-                      <h4 className="flex gap-1 items-center">
-                        Minimum BTC Received:
-                      </h4>
-                      <p>.29903001 ₿ </p>
+                      <div className="flex items-center gap-3">
+                        <p>0.005 cBTC</p>
+                        <span>+</span>
+                        <p>0.05 ERG </p>
+                      </div>
                     </div>
                   </div>
                   {/* btc address */}

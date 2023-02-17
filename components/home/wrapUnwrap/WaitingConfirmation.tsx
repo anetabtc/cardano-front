@@ -62,8 +62,9 @@ const WaitingConfirmation = ({
                     <div className="w-20 h-20 border-8 border-b-[#76D572] rounded-full animate-spin border-black" />
                   </div>
                   <p className="text-xs font-nunito-sans text-neutral-200 text-center flex flex-col justify-center items-center gap-[2px]">
-                    Sending 0.30 cBTC for BTC
-                    <span>Paying 45 ADA Bridge Fee</span>
+                    {/* Sending 0.30 cBTC for BTC
+                    <span>Paying 45 ADA Bridge Fee</span> */}
+                    Unwrapping 1.0 cBTC
                   </p>
                   <p className="text-xs text-neutral-400 text-center">
                     Confirm this transaction in your wallet
