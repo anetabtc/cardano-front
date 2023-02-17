@@ -4,6 +4,7 @@ import { XMarkIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
 import React, { Fragment } from "react";
 import WaitingConfirmation from "../WaitingConfirmation";
+import ButtonLoader from "../../../partials/loader/ButtonLoader";
 
 interface Props {
   isOpen: boolean;
@@ -19,6 +20,7 @@ const ConfirmUnwrap = ({
   successNotify,
 }: Props) => {
   const [isWaitingShow, setIsWaitingShow] = React.useState<boolean>(false);
+  const [buttonLoader, setButtonLoader] = React.useState<boolean>(false);
 
   const closeModal = () => {
     setIsOpen(false);
@@ -140,14 +142,18 @@ const ConfirmUnwrap = ({
                   </div>
                   <button
                     onClick={() => {
-                      submitFinalData();
-                      setIsWaitingShow(true);
+                      setButtonLoader(true);
+                      setTimeout(() => {
+                        setButtonLoader(false);
+                        submitFinalData();
+                        setIsWaitingShow(true);
+                      }, 2000);
                     }}
                     className={
-                      "bg-primary-blue-color hover:bg-primary-blue-color/80  transition-all font-semibold font-nunito-sans text-gray-50 w-full text-center p-3 rounded-lg text-sm"
+                      "bg-primary-blue-color hover:bg-primary-blue-color/80 flex items-center justify-center gap-2  transition-all font-semibold font-nunito-sans text-gray-50 w-full text-center p-3 rounded-lg text-sm"
                     }
                   >
-                    Confirm Unwrap
+                    {buttonLoader && <ButtonLoader />} Confirm Unwrap
                   </button>
                   <WaitingConfirmation
                     isOpen={isWaitingShow}

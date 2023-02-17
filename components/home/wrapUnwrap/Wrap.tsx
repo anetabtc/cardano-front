@@ -3,6 +3,7 @@ import React, { Fragment, useState } from "react";
 import styles from "../../../styles/home/WrapUnwrap.module.css";
 import Notifications from "./Notifications";
 import BtcDeposit from "./wrap/BtcDeposit";
+import ButtonLoader from "../../partials/loader/ButtonLoader";
 
 interface Props {
   payBridgeModalOpen: boolean;
@@ -14,6 +15,7 @@ interface Props {
 const Wrap = ({ payBridgeModalOpen, setPayBridgeModalOpen }: Props) => {
   const [successNotify, setSuccessNotify] = useState<boolean>(false);
   const [btcDepositOpen, setBtcDepositOpen] = useState<boolean>(false);
+  const [buttonLoader, setButtonLoader] = useState<boolean>(false);
   const [btcDepositSuccessOpen, setBtcDepositSuccessOpen] =
     useState<boolean>(false);
   const [amount, setAmount] = useState<
@@ -25,7 +27,7 @@ const Wrap = ({ payBridgeModalOpen, setPayBridgeModalOpen }: Props) => {
     setBtcDepositOpen(false);
     setBtcDepositSuccessOpen(false);
   };
-  
+
   React.useEffect(() => {
     if (successNotify) {
       setPayBridgeModalOpen(false);
@@ -125,10 +127,16 @@ const Wrap = ({ payBridgeModalOpen, setPayBridgeModalOpen }: Props) => {
       {/* final button  */}
       {amount ? (
         <button
-          onClick={() => setBtcDepositOpen(true)}
+          onClick={() => {
+            setButtonLoader(true);
+            setTimeout(() => {
+              setBtcDepositOpen(true);
+              setButtonLoader(false);
+            }, 2000);
+          }}
           className={styles.wrapBtc}
         >
-          Wrap BTC
+          {buttonLoader && <ButtonLoader />} Wrap BTC
         </button>
       ) : (
         <button disabled={true} className={styles.enterAmountBtc}>

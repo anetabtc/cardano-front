@@ -5,6 +5,7 @@ import { validate } from "bitcoin-address-validation";
 import ConfirmUnwrap from "./unwrap/ConfirmUnwrap";
 import Notifications from "./Notifications";
 import UnwrapTransactionSuccessfull from "./unwrap/UnwrapTransactionSuccessfull";
+import ButtonLoader from "../../partials/loader/ButtonLoader";
 
 interface Props {
   payBridgeModalOpen: boolean;
@@ -21,11 +22,11 @@ const Unwrap = ({
   const [successNotify, setSuccessNotify] = useState<boolean>(false);
   const [successResultModal, setSuccessResultModal] = useState<boolean>(false);
   const [btcAddress, setBtcAddress] = useState<string>("");
+  const [buttonLoader, setButtonLoader] = useState<boolean>(false);
   const [amount, setAmount] = useState<
     string | number | readonly string[] | undefined
   >();
   const hasRendered = useRef(false);
-  // when notification appear, the loading and popup will disable
 
   React.useEffect(() => {
     if (successNotify) {
@@ -179,10 +180,16 @@ const Unwrap = ({
 
       {amount ? (
         <button
-          onClick={() => setPayBridgeModalOpen(true)}
+          onClick={() => {
+            setButtonLoader(true);
+            setTimeout(() => {
+              setButtonLoader(false);
+              setPayBridgeModalOpen(true);
+            }, 2000);
+          }}
           className={styles.wrapBtc}
         >
-          Unwrap cBTC
+          {buttonLoader && <ButtonLoader />} Unwrap cBTC
         </button>
       ) : (
         <button disabled={true} className={styles.enterAmountBtc}>
