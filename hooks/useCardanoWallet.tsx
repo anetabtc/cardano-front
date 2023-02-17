@@ -24,12 +24,16 @@ export default function useCardanoWallet() {
   }, []);
 
   async function connectWallet(cardanoWallet: CardanoWallet) {
-    const walletApi = await cardanoWallet.enable();
-    setCardanoWalletApi({
-      ...walletApi,
-      name: cardanoWallet.name,
-      icon: cardanoWallet.icon,
-    });
+    try {
+      const walletApi = await cardanoWallet.enable();
+      setCardanoWalletApi({
+        ...walletApi,
+        name: cardanoWallet.name,
+        icon: cardanoWallet.icon,
+      });
+    } catch (error) {
+      alert("Fail to connect to wallet");
+    }
   }
 
   async function disconnectWallet() {
