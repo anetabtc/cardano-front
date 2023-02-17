@@ -141,6 +141,7 @@ const ConfirmUnwrap = ({
                     </p>
                   </div>
                   <button
+                    disabled={buttonLoader}
                     onClick={() => {
                       setButtonLoader(true);
                       setTimeout(() => {

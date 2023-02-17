@@ -127,6 +127,7 @@ const Wrap = ({ payBridgeModalOpen, setPayBridgeModalOpen }: Props) => {
       {/* final button  */}
       {amount ? (
         <button
+          disabled={buttonLoader}
           onClick={() => {
             setButtonLoader(true);
             setTimeout(() => {

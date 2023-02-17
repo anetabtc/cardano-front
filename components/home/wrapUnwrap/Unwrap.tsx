@@ -180,6 +180,7 @@ const Unwrap = ({
 
       {amount ? (
         <button
+          disabled={buttonLoader}
           onClick={() => {
             setButtonLoader(true);
             setTimeout(() => {
