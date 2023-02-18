@@ -90,7 +90,7 @@ const KYA = ({ isOpen, setIsOpen }: Props) => {
                             "Only YOU are responsible for your own assets;",
                             "The anetaBTC protocol and its smart contracts meet your expectations",
                           ].map((value, index) => (
-                            <li>{value}</li>
+                            <li key={index}>{value}</li>
                           ))}
                         </ol>
                       </p>
@@ -102,15 +102,15 @@ const KYA = ({ isOpen, setIsOpen }: Props) => {
                             "app.anetabtc.io operates on a live blockchain, thus all transactions are final and irreversible.",
                             "Every transaction can be viewed via Ergo Explorer and BTC Explorer",
                             "By creating an order you send your funds to a specific smart-contract, all such contracts are wired into the user interface. Thus, orders are created entirely in your browser (on your machine).",
-                          ].map((value) => (
-                            <li>{value}</li>
+                          ].map((value, index) => (
+                            <li key={index}>{value}</li>
                           ))}
                         </ul>
                       </p>
                       <p>
                         <b className="font-semibold">
-                          The anetaBTC team doesn't guarantee the absence of
-                          bugs and errors.
+                          The anetaBTC team doesn&apos;t guarantee the absence
+                          of bugs and errors.
                         </b>
                         <br />
                         app.anetabtc.io is without a Know Your Customer (KYC)
