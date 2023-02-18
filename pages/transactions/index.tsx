@@ -42,25 +42,25 @@ export default function Transactions() {
                   <tr>
                     <th
                       scope="col"
-                      className=" font-medium z-10 border-b border-gray-300 bg-opacity-75 py-3.5 text-left text-[12px] text-neutral-200 backdrop-blur backdrop-filter "
+                      className=" font-medium z-10 border-b border-gray-300 bg-opacity-75 py-3.5 text-left text-[12px] text-neutral-200 "
                     >
                       Created At
                     </th>
                     <th
                       scope="col"
-                      className=" font-medium z-10 hidden border-b border-gray-300 bg-opacity-75 px-8 py-3.5 text-left text-[12px] text-neutral-200 backdrop-blur backdrop-filter sm:table-cell"
+                      className=" font-medium z-10 hidden border-b border-gray-300 bg-opacity-75 px-8 py-3.5 text-left text-[12px] text-neutral-200 sm:table-cell"
                     >
                       Transaction (BTC)
                     </th>
                     <th
                       scope="col"
-                      className=" font-medium z-10 hidden border-b border-gray-300 bg-opacity-75 px-8 py-3.5 text-left text-[12px] text-neutral-200 backdrop-blur backdrop-filter lg:table-cell"
+                      className=" font-medium z-10 hidden border-b border-gray-300 bg-opacity-75 px-8 py-3.5 text-left text-[12px] text-neutral-200 lg:table-cell"
                     >
                       Transaction (eBTC)
                     </th>
                     <th
                       scope="col"
-                      className="sticky top-0 font-medium z-10 border-b border-gray-300 bg-opacity-75 px-8 py-3.5 text-left text-[12px] text-neutral-200 backdrop-blur backdrop-filter"
+                      className=" font-medium border-b border-gray-300 bg-opacity-75 px-8 py-3.5 text-left text-[12px] text-neutral-200"
                     >
                       Transaction{" "}
                       {tabName == "Wrap Requests"
@@ -69,13 +69,13 @@ export default function Transactions() {
                     </th>
                     <th
                       scope="col"
-                      className="sticky top-0 font-medium z-10 border-b border-gray-300 bg-opacity-75 px-8 py-3.5 text-left text-[12px] text-neutral-200 backdrop-blur backdrop-filter"
+                      className=" font-medium border-b border-gray-300 bg-opacity-75 px-8 py-3.5 text-left text-[12px] text-neutral-200"
                     >
                       anetaBTC ID
                     </th>
                     <th
                       scope="col"
-                      className="sticky top-0 font-medium z-10 border-b border-gray-300 bg-opacity-75 pl-3 py-3.5 text-left text-[12px] text-neutral-200 backdrop-blur backdrop-filter"
+                      className=" font-medium border-b border-gray-300 bg-opacity-75 pl-3 py-3.5 text-left text-[12px] text-neutral-200"
                     >
                       Confirmation Status
                     </th>

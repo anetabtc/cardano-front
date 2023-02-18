@@ -1,10 +1,6 @@
 import React, { useState, Fragment } from "react";
 import styles from "../../../styles/partials/Navbar.module.css";
-import {
-  CheckIcon,
-  ChevronUpDownIcon,
-  XMarkIcon,
-} from "@heroicons/react/24/solid";
+import { ChevronUpDownIcon, XMarkIcon } from "@heroicons/react/24/solid";
 import { Listbox, Tab, Transition } from "@headlessui/react";
 import { classNames } from "../../../utils/Classnames";
 import Link from "next/link";
