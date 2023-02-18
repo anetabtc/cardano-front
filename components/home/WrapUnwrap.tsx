@@ -15,7 +15,9 @@ const WrapUnwrap = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setBtcValidAddressFinal(validBtcAddress);
+    setTimeout(() => {
+      setBtcValidAddressFinal(validBtcAddress);
+    }, 2000);
   };
 
   return (
