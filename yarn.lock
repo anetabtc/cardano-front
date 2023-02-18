@@ -29,33 +29,33 @@
   resolved "https://registry.yarnpkg.com/@cardano-ogmios/schema/-/schema-5.5.2.tgz#7e00c8b6f6c5639149ea06b172b5bc780605840d"
   integrity sha512-0+vlT13y+/hXYCHoX8Fvd1O+8mRoPJ0ajc/NMtFgZr6aIRm7zu8Jpa8gWjNJJqAp8f3F2vj4eIeB7F9suIfmaQ==
 
-"@cardano-sdk/cip30@^0.4.0":
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/@cardano-sdk/cip30/-/cip30-0.4.0.tgz#f340ab06ac68cac9669e4d2c21f62c95a4b4efdf"
-  integrity sha512-IQLTNvbd3TvK/WEJRGxUKZQ7TJhYp6qD+DDjR7P/0WqN4aI37eow6hSA67MsZ6AHD3wTDhFgfBYRoKt7/y3X0g==
+"@cardano-sdk/cip30@^0.5.0":
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/@cardano-sdk/cip30/-/cip30-0.5.0.tgz#aa61f55d9482e010dae5e5f4a02f6f717cf71c2a"
+  integrity sha512-78o4VSMZhKJfD9V96eaJeOilTJO3RaaFkHGwKe4uBg4jFMI7zDAxYJgtuWJyJ+9UNC+20AfYAP1GitCn9Z85Lg==
   dependencies:
-    "@cardano-sdk/core" "0.4.0"
+    "@cardano-sdk/core" "^0.5.0"
     ts-custom-error "^3.2.0"
     ts-log "^2.2.3"
     webextension-polyfill "^0.8.0"
 
-"@cardano-sdk/core@0.4.0":
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/@cardano-sdk/core/-/core-0.4.0.tgz#c38a49e62f265ef1b73449b077b00da077bf14ba"
-  integrity sha512-uXwqnqbZa+2W5lQGoaM1xxe09eXOkzPE7JF00AKbqg3zgWiZcDwBIK0f61soTvzgiy/mhZmJGmqiI0Ooj1ZdMQ==
+"@cardano-sdk/core@^0.5.0":
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/@cardano-sdk/core/-/core-0.5.0.tgz#7dbf1ff08f7c49dae8606b8fac378f9ec70e4a53"
+  integrity sha512-MGN7GRwrU8hJjjZrUWYm/4V2TLVJgMOqu7yN0rQTU7Wh72CvYID/Xl8TtZE3UydBO0wYSy3nR000uxIULInvJg==
   dependencies:
     "@cardano-ogmios/client" "5.5.2"
-    "@cardano-ogmios/schema" "5.5.2"
-    "@cardano-sdk/util" "0.4.0"
-    "@emurgo/cardano-serialization-lib-browser" "9.1.0"
-    "@emurgo/cardano-serialization-lib-nodejs" "9.1.0"
+    "@cardano-sdk/util" "^0.5.0"
+    "@emurgo/cardano-serialization-lib-browser" "11.0.0-rc.6"
+    "@emurgo/cardano-serialization-lib-nodejs" "11.0.0-rc.6"
     bech32 "^2.0.0"
     lodash "^4.17.21"
+    ts-custom-error "^3.2.0"
 
-"@cardano-sdk/util@0.4.0":
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/@cardano-sdk/util/-/util-0.4.0.tgz#790ced33a66e3398200171fe26314ae56f790fff"
-  integrity sha512-hGGS8Gfwm0q1Gcde98bRFifaWWKVpCpVwEPTP5+gV4w/z/j2AzLUXv1pEKojQ1b7vTMd+AhGp5pi9x/jodsiHQ==
+"@cardano-sdk/util@^0.5.0":
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/@cardano-sdk/util/-/util-0.5.0.tgz#5dde1422d1ec869f51e30c0b3d64fce6fec68bc0"
+  integrity sha512-8wEDcV/kwtoH8cifNhUgIo24ACszum0S05MQRz6yzyA2e+I7i4zZaOktgXmts/xA+i7ppTk2eunDK8Rok197cw==
   dependencies:
     lodash "^4.17.21"
     serialize-error "^8"
@@ -67,15 +67,15 @@
   dependencies:
     bignumber.js "^9.0.0"
 
-"@emurgo/cardano-serialization-lib-browser@9.1.0":
-  version "9.1.0"
-  resolved "https://registry.yarnpkg.com/@emurgo/cardano-serialization-lib-browser/-/cardano-serialization-lib-browser-9.1.0.tgz#2a80800608877555d1ff52ed839e7f2c8b1ace95"
-  integrity sha512-FaNW/RalB/BPYvQbum0zkUcMxd+jKvsdwvT93GErKd/owE9W4IKhQfqI9icDZSphqFFPkDqHms2VE4XT4P7gDA==
+"@emurgo/cardano-serialization-lib-browser@11.0.0-rc.6":
+  version "11.0.0-rc.6"
+  resolved "https://registry.yarnpkg.com/@emurgo/cardano-serialization-lib-browser/-/cardano-serialization-lib-browser-11.0.0-rc.6.tgz#3effa90f7bac8d3ea4b0cbcc0bdc03acf81b35d2"
+  integrity sha512-EWqknJqmJf+Tnsn5s05CvKRPCC0ncGcDHjqf9pjty/FKRo2oC6CzmLk3CciRhucmD78cxSiHlhMl8dqROivxPg==
 
-"@emurgo/cardano-serialization-lib-nodejs@9.1.0":
-  version "9.1.0"
-  resolved "https://registry.yarnpkg.com/@emurgo/cardano-serialization-lib-nodejs/-/cardano-serialization-lib-nodejs-9.1.0.tgz#8813b8a040c0425aab454f8ee1ba4f4709031324"
-  integrity sha512-4gW+KqejTSm/rkNwWxK/WUJvlifWqFx5ShgCtWmPuTZ/YJAZSpROI8DP+pqTakG0gGWdxPB3BnVJIPrczNwmtA==
+"@emurgo/cardano-serialization-lib-nodejs@11.0.0-rc.6":
+  version "11.0.0-rc.6"
+  resolved "https://registry.yarnpkg.com/@emurgo/cardano-serialization-lib-nodejs/-/cardano-serialization-lib-nodejs-11.0.0-rc.6.tgz#bef613a10f5a99610c85aff4c16d596ca9cbbbe2"
+  integrity sha512-OXakMlp9sgB8kX+pwPY8z9REHcXG93dmIfSqHHLNq/CzwxCDa1lr/zg/3BtJL4Di6LzBBo8X+kUd9ehdX5diHA==
 
 "@eslint/eslintrc@^1.4.1":
   version "1.4.1"
