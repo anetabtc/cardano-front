@@ -81,7 +81,7 @@ const Wrap = ({ payBridgeModalOpen, setPayBridgeModalOpen }: Props) => {
               width={25}
             />
             {amount ? (
-              <p className="">0.33</p>
+              <p className="">{0.995 * Number(amount) - 0.0001}</p>
             ) : (
               <p className=" opacity-80">0.0</p>
             )}
@@ -99,12 +99,12 @@ const Wrap = ({ payBridgeModalOpen, setPayBridgeModalOpen }: Props) => {
           <div>
             <div className="flex items-center gap-2">
               <Image
-                src={"/images/logo/circle-star.png"}
+                src={"/images/logo/bitcoin.png"}
                 alt="Circle star"
                 width={25}
                 height={25}
               />
-              <p>0.0 ₳</p>
+              <p>{0.005 * Number(amount) + 0.0001} ₳</p>
             </div>
             {amount && <p className="text-[13px] text-right mt-1">= $ 13.63</p>}
           </div>
