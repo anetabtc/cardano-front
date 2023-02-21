@@ -104,7 +104,7 @@ const Wrap = ({ payBridgeModalOpen, setPayBridgeModalOpen }: Props) => {
                 width={25}
                 height={25}
               />
-              <p>{0.005 * Number(amount) + 0.0001} ₳</p>
+              <p>{amount ? 0.005 * Number(amount) + 0.0001 : "0.0"} ₳</p>
             </div>
             {amount && <p className="text-[13px] text-right mt-1">= $ 13.63</p>}
           </div>

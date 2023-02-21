@@ -97,7 +97,9 @@ const Unwrap = ({
               height={25}
               width={25}
             />
-            <p className=" opacity-80">~ {0.995 * Number(amount) - 0.0001}</p>
+            <p className=" opacity-80">
+              ~ {amount ? 0.995 * Number(amount) - 0.0001 : "0.0"}
+            </p>
             <h2 className="font-medium font-nunito-sans">BTC</h2>
           </div>
           {amount && <p className={styles.totalEbtc}>= $ 5157.70</p>}
@@ -118,7 +120,7 @@ const Unwrap = ({
                   width={25}
                   height={25}
                 />
-                <p>{amount ? 0.005 * Number(amount) + 0.0001 : "0"} cBTC</p>
+                <p>{amount ? 0.005 * Number(amount) + 0.0001 : "0.0"} cBTC</p>
               </div>
               <p>+</p>
               <div className="flex items-center gap-2">
