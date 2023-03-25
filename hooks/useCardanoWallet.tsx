@@ -20,7 +20,9 @@ export default function useCardanoWallet() {
       // throw new Error("No Cardano wallet found!");
       return alert("No cardano wallet found!");
     }
-    setCardanoWallets(CARDANO_WALLETS.map((walletKey) => cardano[walletKey]));
+    setCardanoWallets(
+      CARDANO_WALLETS.map((walletKey) => cardano[walletKey]) as any
+    );
   }, []);
 
   async function connectWallet(cardanoWallet: CardanoWallet) {

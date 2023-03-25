@@ -1,13 +1,5 @@
 import { Cip30Wallet, WalletApi } from "@cardano-sdk/cip30";
 
-declare global {
-  interface Window {
-    cardano?: {
-      [k: string]: Cip30Wallet;
-    };
-  }
-}
-
 export type CardanoWallet = Cip30Wallet;
 export type CardanoWalletApi = WalletApi & { name: string; icon: string };
 
