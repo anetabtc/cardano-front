@@ -1,7 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from "next";
+import { BLOCKFROST_URL, CardanoNetwork } from "../../utils/api";
 
-const mainnetUrl = "https://cardano-mainnet.blockfrost.io/api/v0";
-const projectId = "";
+const CARDANO_NETWORK = process.env.CARDANO_NETWORK;
+const BLOCKFROST_PROJECT_ID = process.env.BLOCKFROST_PROJECT_ID;
 
 export default async function handler(
   req: NextApiRequest,
@@ -9,13 +10,21 @@ export default async function handler(
 ) {
   const { url, method, body, headers } = req.body;
 
+  if (!CARDANO_NETWORK || !BLOCKFROST_PROJECT_ID) {
+    return res
+      .status(500)
+      .send("Server is not setup properly. Missing .env file");
+  }
+
+  const blockfrostUrl = BLOCKFROST_URL[CARDANO_NETWORK as CardanoNetwork];
+
   const fetchResponse = await (
-    await fetch(`${mainnetUrl}${url}`, {
+    await fetch(`${blockfrostUrl}${url}`, {
       method,
       body,
       headers: {
         ...headers,
-        project_id: projectId,
+        project_id: BLOCKFROST_PROJECT_ID,
       },
     })
   ).json();
