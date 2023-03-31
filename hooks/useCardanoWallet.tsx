@@ -1,51 +1,33 @@
-import { useEffect, useState } from "react";
-import {
-  CardanoWallet,
-  CardanoWalletApi,
-  CARDANO_WALLETS,
-} from "../types/cardano";
+import { Cip30Wallet } from "@cardano-sdk/cip30";
+import { useContext } from "react";
+import { GlobalContext } from "../components/GlobalContext";
 
 /**
  * NOTE: all the states should actually be global. It is up to you to implement
  * your preferred state manager.
  */
 export default function useCardanoWallet() {
-  const [cardanoWallets, setCardanoWallets] = useState<CardanoWallet[]>([]);
-  const [cardanoWalletApi, setCardanoWalletApi] =
-    useState<CardanoWalletApi | null>(null);
+  const globalContext = useContext(GlobalContext);
 
-  useEffect(() => {
-    const cardano = window.cardano;
-    if (cardano == null) {
-      // throw new Error("No Cardano wallet found!");
-      return alert("No cardano wallet found!");
-    }
-    setCardanoWallets(
-      CARDANO_WALLETS.map((walletKey) => cardano[walletKey]) as any
-    );
-  }, []);
-
-  async function connectWallet(cardanoWallet: CardanoWallet) {
+  async function connectWallet(cardanoWallet: Cip30Wallet) {
     try {
       const walletApi = await cardanoWallet.enable();
-      setCardanoWalletApi({
-        ...walletApi,
-        name: cardanoWallet.name,
-        icon: cardanoWallet.icon,
-      });
+      globalContext.setWalletMeta(cardanoWallet);
+      globalContext.setWalletApi(walletApi);
     } catch (error) {
       alert("Fail to connect to wallet");
     }
   }
 
   async function disconnectWallet() {
-    setCardanoWalletApi(null);
+    globalContext.setWalletMeta(null);
+    globalContext.setWalletApi(null);
   }
 
   return {
-    cardanoWallets,
-    cardanoWalletApi,
     connectWallet,
     disconnectWallet,
+    walletApi: globalContext.walletApi,
+    walletMeta: globalContext.walletMeta,
   };
 }

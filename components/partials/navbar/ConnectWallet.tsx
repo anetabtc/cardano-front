@@ -1,9 +1,10 @@
+import { Cip30Wallet } from "@cardano-sdk/cip30";
 import { Dialog, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/solid";
-import { Fragment, useEffect } from "react";
+import { Fragment, useEffect, useState } from "react";
 import useCardanoWallet from "../../../hooks/useCardanoWallet";
 import styles from "../../../styles/partials/Navbar.module.css";
-import { CardanoWallet } from "../../../types/cardano";
+import { CARDANO_WALLETS } from "../../../types/cardano";
 interface Props {
   isOpen: boolean;
   setIsOpen: (value: boolean) => void;
@@ -11,24 +12,24 @@ interface Props {
   setIsLoggedIn: (value: boolean) => void;
 }
 
-const ConnectWallet = ({
-  isOpen,
-  setIsOpen,
-  isLoggedIn,
-  setIsLoggedIn,
-}: Props) => {
-  const { cardanoWallets, connectWallet, cardanoWalletApi } =
-    useCardanoWallet();
+const ConnectWallet = ({ isOpen, setIsOpen }: Props) => {
+  const { connectWallet } = useCardanoWallet();
+  const [cardanoWallets, setCardanoWallets] = useState<Cip30Wallet[]>([]);
 
-  const handleConnectWallet = (cardanoWallet: CardanoWallet) => {
+  const handleConnectWallet = (cardanoWallet: Cip30Wallet) => {
     setIsOpen(false);
     connectWallet(cardanoWallet);
   };
 
-  /** example of using cardano wallet api */
   useEffect(() => {
-    console.log(cardanoWalletApi);
-  }, [cardanoWalletApi]);
+    const cardano = window.cardano;
+    if (cardano == null) {
+      return;
+    }
+    setCardanoWallets(
+      CARDANO_WALLETS.map((walletKey) => cardano[walletKey]) as any
+    );
+  }, []);
 
   return (
     <Transition appear show={isOpen} as={Fragment}>
@@ -73,7 +74,7 @@ const ConnectWallet = ({
                     />
                   </div>
                   <div className="border border-gray-500 rounded-lg mt-4 divide-y-[1px] divide-gray-500">
-                    {cardanoWallets.map((wallet: CardanoWallet, i: number) =>
+                    {cardanoWallets.map((wallet: Cip30Wallet, i: number) =>
                       wallet?.name && wallet?.icon ? (
                         <button
                           key={i}

@@ -1,10 +1,10 @@
 import { Tab } from "@headlessui/react";
 import React, { useState } from "react";
-import { classNames } from "../../utils/Classnames";
 import styles from "../../styles/home/WrapUnwrap.module.css";
-import Wrap from "./wrapUnwrap/Wrap";
-import Unwrap from "./wrapUnwrap/Unwrap";
+import { classNames } from "../../utils/Classnames";
 import InvalidBTCAddressModal from "./wrapUnwrap/InvalidBTCAddressModal";
+import Unwrap from "./wrapUnwrap/Unwrap";
+import Wrap from "./wrapUnwrap/Wrap";
 
 const WrapUnwrap = () => {
   const [payBridgeModalOpen, setPayBridgeModalOpen] = useState<boolean>(false);

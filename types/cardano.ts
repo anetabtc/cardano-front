@@ -1,8 +1,3 @@
-import { Cip30Wallet, WalletApi } from "@cardano-sdk/cip30";
-
-export type CardanoWallet = Cip30Wallet;
-export type CardanoWalletApi = WalletApi & { name: string; icon: string };
-
 /**
  * NOTE: please add more wallet names according to your needs.
  *
