@@ -8,8 +8,6 @@ import { CARDANO_WALLETS } from "../../../types/cardano";
 interface Props {
   isOpen: boolean;
   setIsOpen: (value: boolean) => void;
-  isLoggedIn: boolean;
-  setIsLoggedIn: (value: boolean) => void;
 }
 
 const ConnectWallet = ({ isOpen, setIsOpen }: Props) => {

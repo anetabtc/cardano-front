@@ -1,40 +1,44 @@
-import React, { useState } from "react";
-import styles from "../../../styles/partials/Navbar.module.css";
+import { Cip30Wallet } from "@cardano-sdk/cip30";
+import { Transition } from "@headlessui/react";
 import Image from "next/image";
-import { ChevronDownIcon } from "@heroicons/react/24/solid";
-import WalletDropdown from "./WalletDropdown";
-const LoggedInWallet = ({ setDisconnect }: any) => {
-  const [walletDropDownShowing, setWalletDropDownShowing] = useState(false);
+import { Fragment } from "react";
+import useVisible from "../../../hooks/useVisible";
+import styles from "../../../styles/partials/Navbar.module.css";
+
+interface Props {
+  disconnectWallet: Function;
+  walletMeta: Cip30Wallet;
+}
+
+const LoggedInWallet = ({ disconnectWallet, walletMeta }: Props) => {
+  const { visible, setVisible, ref } = useVisible(false);
 
   return (
-    <>
-      <div className={styles.loggedWallet}>
-        <p>1,600.63 ₳</p>
-        <div className="flex items-center">
-          <Image
-            src={"/images/wallet/wallet-2.png"}
-            alt="Wallet image"
-            width={20}
-            height={20}
-            className="mr-1 ml-3"
-          />
-          <p
-            onClick={() => setWalletDropDownShowing(true)}
-            className="flex cursor-pointer items-center justify-between "
-          >
-            addr1...4lyn3h
-            <ChevronDownIcon className="w-3 h-3 text-white ml-1" />
-          </p>
+    <div
+      ref={ref}
+      className={`${styles.loggedWallet} h-full flex items-center gap-2 relative`}
+      onClick={() => setVisible(!visible)}
+    >
+      <Image src={walletMeta.icon} alt="Wallet image" width={20} height={20} />
+      <p className="flex cursor-pointer items-center justify-between ">
+        addr1...4lyn3h
+      </p>
+
+      <Transition
+        as={Fragment}
+        leave="transition ease-in duration-100"
+        leaveFrom="opacity-100"
+        leaveTo="opacity-0"
+        show={visible}
+      >
+        <div
+          className={`${styles.loggedWallet} w-full h-full absolute right-0 top-12 flex items-center justify-center`}
+          onClick={() => disconnectWallet()}
+        >
+          Disconnect
         </div>
-      </div>
-      <div className="text-xs">
-        <WalletDropdown
-          setDisconnect={setDisconnect}
-          isShowing={walletDropDownShowing}
-          setIsShowing={setWalletDropDownShowing}
-        />
-      </div>
-    </>
+      </Transition>
+    </div>
   );
 };
 
