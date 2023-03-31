@@ -2,8 +2,11 @@ import { Cip30Wallet } from "@cardano-sdk/cip30";
 import { Transition } from "@headlessui/react";
 import Image from "next/image";
 import { Fragment } from "react";
+import useCardanoWallet from "../../../hooks/useCardanoWallet";
 import useVisible from "../../../hooks/useVisible";
 import styles from "../../../styles/partials/Navbar.module.css";
+import { shortenAddress } from "../../../utils/address";
+import { LOADING_TEXT } from "../../../utils/constants";
 
 interface Props {
   disconnectWallet: Function;
@@ -12,6 +15,7 @@ interface Props {
 
 const LoggedInWallet = ({ disconnectWallet, walletMeta }: Props) => {
   const { visible, setVisible, ref } = useVisible(false);
+  const { walletAddress } = useCardanoWallet();
 
   return (
     <div
@@ -21,7 +25,9 @@ const LoggedInWallet = ({ disconnectWallet, walletMeta }: Props) => {
     >
       <Image src={walletMeta.icon} alt="Wallet image" width={20} height={20} />
       <p className="flex cursor-pointer items-center justify-between ">
-        addr1...4lyn3h
+        {walletAddress === LOADING_TEXT
+          ? walletAddress
+          : shortenAddress(walletAddress)}
       </p>
 
       <Transition

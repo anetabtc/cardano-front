@@ -1,6 +1,7 @@
 import { Cip30Wallet } from "@cardano-sdk/cip30";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { GlobalContext } from "../components/GlobalContext";
+import { LOADING_TEXT } from "../utils/constants";
 
 /**
  * NOTE: all the states should actually be global. It is up to you to implement
@@ -8,6 +9,19 @@ import { GlobalContext } from "../components/GlobalContext";
  */
 export default function useCardanoWallet() {
   const globalContext = useContext(GlobalContext);
+
+  const [walletAddress, setWalletAddress] = useState(LOADING_TEXT);
+
+  async function updateWalletAddress() {
+    const { walletApi, lucid } = globalContext;
+    if (walletApi && lucid) {
+      lucid.selectWallet(walletApi as any);
+      setWalletAddress(await lucid.wallet.address());
+    }
+  }
+  useEffect(() => {
+    updateWalletAddress();
+  }, [globalContext.walletApi]);
 
   async function connectWallet(cardanoWallet: Cip30Wallet) {
     try {
@@ -29,5 +43,6 @@ export default function useCardanoWallet() {
     disconnectWallet,
     walletApi: globalContext.walletApi,
     walletMeta: globalContext.walletMeta,
+    walletAddress,
   };
 }
