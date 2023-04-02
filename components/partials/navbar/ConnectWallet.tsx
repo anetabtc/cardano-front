@@ -14,9 +14,9 @@ const ConnectWallet = ({ isOpen, setIsOpen }: Props) => {
   const { connectWallet } = useCardanoWallet();
   const [cardanoWallets, setCardanoWallets] = useState<Cip30Wallet[]>([]);
 
-  const handleConnectWallet = (cardanoWallet: Cip30Wallet) => {
+  const handleConnectWallet = (cardanoWalletName: string) => {
     setIsOpen(false);
-    connectWallet(cardanoWallet);
+    connectWallet(cardanoWalletName);
   };
 
   useEffect(() => {
@@ -76,7 +76,7 @@ const ConnectWallet = ({ isOpen, setIsOpen }: Props) => {
                       wallet?.name && wallet?.icon ? (
                         <button
                           key={i}
-                          onClick={() => handleConnectWallet(wallet)}
+                          onClick={() => handleConnectWallet(wallet.name)}
                           className="flex first:rounded-t-lg last:rounded-b-lg items-center justify-between p-4 w-full hover:bg-[#25345A]"
                         >
                           <p className=" font-light">{wallet.name}</p>

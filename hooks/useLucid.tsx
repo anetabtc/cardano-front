@@ -7,20 +7,21 @@ import {
   toUnit,
   WalletApi,
 } from "lucid-cardano";
-import { Blockfrost } from "../services/provider/blockfrost";
 
 export default function useLucid() {
   async function transferAda({
+    lucid,
     walletApi,
     toAddress,
     amount,
   }: {
+    lucid: Lucid;
     walletApi: WalletApi;
     toAddress: string;
     amount: number;
   }) {
     try {
-      const lucid = await Lucid.new(new Blockfrost(), "Mainnet");
+      // const lucid = await Lucid.new(new CustomBlockfrost(), "Mainnet");
       lucid.selectWallet(walletApi);
       const tx = await lucid
         .newTx()

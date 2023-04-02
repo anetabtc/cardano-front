@@ -19,7 +19,7 @@ import {
   UTxO,
 } from "lucid-cardano";
 
-export class Blockfrost implements Provider {
+export class CustomBlockfrost implements Provider {
   async getProtocolParameters(): Promise<ProtocolParameters> {
     const payload = {
       url: "/epochs/latest/parameters",

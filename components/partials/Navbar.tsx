@@ -132,7 +132,7 @@ const Navbar = () => {
                   ? setIsWalletShowing(false)
                   : setIsWalletShowing(true)
               }
-              className={styles.connectWallet}
+              className={`${styles.connectWallet} h-full`}
             >
               Connect Wallet
             </button>
