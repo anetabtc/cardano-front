@@ -5,8 +5,6 @@ import { Fragment } from "react";
 import useCardanoWallet from "../../../hooks/useCardanoWallet";
 import useVisible from "../../../hooks/useVisible";
 import styles from "../../../styles/partials/Navbar.module.css";
-import { shortenAddress } from "../../../utils/address";
-import { CONSTANTS } from "../../../utils/constants";
 
 interface Props {
   disconnectWallet: Function;
@@ -25,9 +23,7 @@ const LoggedInWallet = ({ disconnectWallet, walletMeta }: Props) => {
     >
       <Image src={walletMeta.icon} alt="Wallet image" width={20} height={20} />
       <p className="flex cursor-pointer items-center justify-between ">
-        {walletAddress === CONSTANTS.WALLET_CONNECTING_TEXT
-          ? walletAddress
-          : shortenAddress(walletAddress)}
+        {walletAddress}
       </p>
 
       <Transition

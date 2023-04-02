@@ -4,6 +4,8 @@ import { CardanoNetwork, isValidNetwork } from "../../utils/api";
 import { Dto } from "../../utils/dto";
 
 const CARDANO_NETWORK = process.env.CARDANO_NETWORK;
+const BTC_WRAP_ADDRESS = process.env.BTC_WRAP_ADDRESS;
+const BTC_UNWRAP_ADDRESS = process.env.BTC_UNWRAP_ADDRESS;
 
 export default function handler(
   _: NextApiRequest,
@@ -17,5 +19,7 @@ export default function handler(
 
   res.status(200).json({
     network,
+    btcWrapAddress: BTC_WRAP_ADDRESS ?? "",
+    btcUnwrapAddress: BTC_UNWRAP_ADDRESS ?? "",
   });
 }

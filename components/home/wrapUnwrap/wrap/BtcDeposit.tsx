@@ -1,8 +1,7 @@
 import { Dialog, Transition } from "@headlessui/react";
 import Image from "next/image";
-import React, { Fragment, useCallback, useEffect, useState } from "react";
-import { MdFileCopy } from "react-icons/md";
-import EnterTXId from "./EnterTXId";
+import { Fragment, useContext, useState } from "react";
+import { GlobalContext } from "../../../GlobalContext";
 import BtcDepositReceivedSuccess from "./BtcDepositReceivedSuccess";
 
 interface Props {
@@ -14,6 +13,7 @@ interface Props {
 }
 
 const BtcDeposit = ({ isOpen, setIsOpen, closeAllModal, wrap }: Props) => {
+  const { btcWrapAddress } = useContext(GlobalContext);
   const [viewAddress, setViewAddress] = useState<boolean>(false);
   const [addErgAddress, setAddErgAddress] = useState(false);
   const [showTxId, setShowTxId] = useState(false);
@@ -88,26 +88,23 @@ const BtcDeposit = ({ isOpen, setIsOpen, closeAllModal, wrap }: Props) => {
                       <div
                         className={`${
                           !addErgAddress && "blur-[2px]"
-                        } w-full text-sm py-0.5 px-8 border border-neutral-400 rounded-lg flex items-center gap-1`}
+                        } w-full text-sm py-0.5 px-8 border border-neutral-400 rounded-lg flex items-center gap-1 flex justify-center`}
                       >
                         {viewAddress ? (
-                          <p className="py-2">
-                            tb1q03i4ngjso93ld8ehtksnf5mndlds8rndnmqoe
-                          </p>
+                          <p className="py-2">{btcWrapAddress}</p>
                         ) : (
                           <button
                             onClick={() => setViewAddress(true)}
-                            className="bg-[#F7931A] hover:bg-[#F7931A]/80  transition-all px-6 py-2  text-xs mx-auto rounded-md "
+                            className="bg-[#F7931A] hover:bg-[#F7931A]/80  transition-all px-6 py-2 text-xs mx-auto rounded-md "
                           >
                             View Address
                           </button>
                         )}
-                        <MdFileCopy className="w-4 h-4 text-neutral-500" />
                       </div>
-                      <p className={`${!addErgAddress && "blur-[2px]"}`}>
+                      {/* <p className={`${!addErgAddress && "blur-[2px]"}`}>
                         Within{" "}
                         <span className=" font-semibold">0 Days 23:59:33</span>
-                      </p>
+                      </p> */}
                       <div className="max-w-[342px] text-center my-2 space-y-4">
                         <h2 className="font-bold text-xl text-[#F7931A]">
                           Attention:

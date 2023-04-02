@@ -7,12 +7,16 @@ import { CONSTANTS } from "../utils/constants";
 import { GlobalContext } from "./GlobalContext";
 
 export default function Init({ children }: { children: ReactNode }) {
-  const { setLucid, setNetwork } = useContext(GlobalContext);
+  const { setLucid, setNetwork, setBtcWrapAddress, setBtcUnwrapAddress } =
+    useContext(GlobalContext);
   const { connectWallet } = useCardanoWallet();
 
   const initLucid = async () => {
-    const { network } = await BffService.getConfig();
+    const { network, btcUnwrapAddress, btcWrapAddress } =
+      await BffService.getConfig();
     setNetwork(network);
+    setBtcUnwrapAddress(btcUnwrapAddress);
+    setBtcWrapAddress(btcWrapAddress);
     setLucid(await Lucid.new(new CustomBlockfrost(), network));
   };
 

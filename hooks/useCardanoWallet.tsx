@@ -1,26 +1,28 @@
 import { Cip30Wallet } from "@cardano-sdk/cip30";
 import { useContext, useEffect, useState } from "react";
 import { GlobalContext } from "../components/GlobalContext";
+import { doesAddressMatchNetwork, shortenAddress } from "../utils/address";
 import { CONSTANTS } from "../utils/constants";
 import { useTryCatch } from "./useTryCatch";
 
-/**
- * NOTE: all the states should actually be global. It is up to you to implement
- * your preferred state manager.
- */
 export default function useCardanoWallet() {
   const globalContext = useContext(GlobalContext);
   const { tryWithErrorHandler } = useTryCatch();
 
   const [walletAddress, setWalletAddress] = useState(
-    CONSTANTS.WALLET_CONNECTING_TEXT
+    CONSTANTS.STRINGS.wallet_connecting
   );
 
   async function updateWalletAddress() {
-    const { walletApi, lucid } = globalContext;
+    const { walletApi, lucid, network } = globalContext;
     if (walletApi && lucid) {
       lucid.selectWallet(walletApi as any);
-      setWalletAddress(await lucid.wallet.address());
+      const address = await lucid.wallet.address();
+      setWalletAddress(
+        doesAddressMatchNetwork(address, network)
+          ? shortenAddress(address)
+          : CONSTANTS.STRINGS.wrong_network
+      );
     }
   }
   useEffect(() => {
@@ -30,7 +32,7 @@ export default function useCardanoWallet() {
   async function connectWallet(cardanoWalletName: string) {
     await tryWithErrorHandler(async () => {
       if (!window.cardano) {
-        throw new Error("No cardano wallet is installed");
+        throw new Error(CONSTANTS.STRINGS.no_cardano_wallet);
       }
 
       const cardanoWallet = window.cardano[

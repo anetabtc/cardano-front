@@ -2,18 +2,23 @@
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
 import { BsBoxArrowUpRight } from "react-icons/bs";
 //react
-import React, { Fragment, useState } from "react";
+import { Fragment, useContext, useState } from "react";
 //css
-import styles from "../../styles/partials/Leftbar.module.css";
-import { classNames } from "../../utils/Classnames";
-import { navigationLeftbar, socialIconLeftbar } from "../../utils/leftbar";
 import { Transition } from "@headlessui/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import styles from "../../styles/partials/Leftbar.module.css";
+import { CardanoNetwork } from "../../utils/api";
+import { classNames } from "../../utils/Classnames";
+import { navigationLeftbar, socialIconLeftbar } from "../../utils/leftbar";
+import { GlobalContext } from "../GlobalContext";
 
 const Leftbar = () => {
   const [isShowing, setIsShowing] = useState<boolean>(true);
   const router = useRouter();
+
+  const { network } = useContext(GlobalContext);
+
   return (
     <div className={styles.maincontainer}>
       <button
@@ -38,9 +43,11 @@ const Leftbar = () => {
       >
         <div>
           <div className={styles.navigationContainer}>
-            <div className="flex justify-center">
-              <h2 className={styles.testnet}>Testnet</h2>
-            </div>
+            {network !== CardanoNetwork.Mainnet ? (
+              <div className="flex justify-center">
+                <h2 className={styles.testnet}>Testnet</h2>
+              </div>
+            ) : null}
             <nav className="space-y-1">
               {navigationLeftbar.map((item) => (
                 <Fragment key={item.name}>

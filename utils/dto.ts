@@ -10,6 +10,8 @@ export namespace Dto {
   export interface GetConfig extends Base {
     response: {
       network: CardanoNetwork;
+      btcWrapAddress: string;
+      btcUnwrapAddress: string;
     };
   }
 }

@@ -15,6 +15,10 @@ interface GlobalContextState {
   setNetwork: (_: CardanoNetwork) => void;
   modalState: ModalState;
   setModalState: (_: ModalState) => void;
+  btcWrapAddress: string;
+  setBtcWrapAddress: (_: string) => void;
+  btcUnwrapAddress: string;
+  setBtcUnwrapAddress: (_: string) => void;
 }
 
 export const GlobalContext = createContext<GlobalContextState>({
@@ -32,6 +36,10 @@ export const GlobalContext = createContext<GlobalContextState>({
     text: "",
   },
   setModalState: () => {},
+  btcWrapAddress: "",
+  setBtcWrapAddress: () => {},
+  btcUnwrapAddress: "",
+  setBtcUnwrapAddress: () => {},
 });
 
 export default function GlobalContextProvider({
@@ -50,6 +58,8 @@ export default function GlobalContextProvider({
     type: "info",
     text: "",
   });
+  const [btcWrapAddress, setBtcWrapAddress] = useState("");
+  const [btcUnwrapAddress, setBtcUnwrapAddress] = useState("");
 
   const globalContext: GlobalContextState = {
     walletMeta,
@@ -62,6 +72,10 @@ export default function GlobalContextProvider({
     setNetwork,
     modalState,
     setModalState,
+    btcWrapAddress,
+    setBtcWrapAddress,
+    btcUnwrapAddress,
+    setBtcUnwrapAddress,
   };
 
   return (

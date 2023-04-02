@@ -1,14 +1,12 @@
 //icons
 import { ArrowPathIcon } from "@heroicons/react/24/solid";
 import {
-  BsTwitter,
-  BsFacebook,
   BsDiscord,
-  BsTelegram,
-  BsFillGridFill,
+  BsFacebook,
   BsGithub,
+  BsTelegram,
+  BsTwitter,
 } from "react-icons/bs";
-import { AiOutlineHistory } from "react-icons/ai";
 import { MdFeedback } from "react-icons/md";
 import { SiReadthedocs } from "react-icons/si";
 import { NavigationType } from "../../types/leftbar";
@@ -20,18 +18,18 @@ export const navigationLeftbar: NavigationType[] = [
     icon: ArrowPathIcon,
     current: false,
   },
-  {
-    name: "Transactions",
-    href: "/transactions",
-    icon: AiOutlineHistory,
-    current: false,
-  },
-  {
-    name: "Dashboard",
-    href: "/dashboard",
-    icon: BsFillGridFill,
-    current: false,
-  },
+  // {
+  //   name: "Transactions",
+  //   href: "/transactions",
+  //   icon: AiOutlineHistory,
+  //   current: false,
+  // },
+  // {
+  //   name: "Dashboard",
+  //   href: "/dashboard",
+  //   icon: BsFillGridFill,
+  //   current: false,
+  // },
   {
     name: "Feedback",
     href: "/feedback",
