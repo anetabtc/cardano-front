@@ -1,7 +1,9 @@
 import { Cip30Wallet, WalletApi } from "@cardano-sdk/cip30";
 import { Lucid } from "lucid-cardano";
 import { createContext, ReactNode, useEffect, useState } from "react";
+import { BffService } from "../services/bff";
 import { Blockfrost } from "../services/provider/blockfrost";
+import { CardanoNetwork } from "../utils/api";
 
 interface GlobalContextState {
   walletMeta: Cip30Wallet | null;
@@ -10,6 +12,7 @@ interface GlobalContextState {
   setWalletApi: (_: WalletApi | null) => void;
   lucid: Lucid | null;
   setLucid: (_: Lucid) => void;
+  network: CardanoNetwork;
 }
 
 export const GlobalContext = createContext<GlobalContextState>({
@@ -19,6 +22,7 @@ export const GlobalContext = createContext<GlobalContextState>({
   setWalletApi: () => {},
   lucid: null,
   setLucid: () => {},
+  network: CardanoNetwork.Preview,
 });
 
 export default function GlobalContextProvider({
@@ -29,6 +33,9 @@ export default function GlobalContextProvider({
   const [walletMeta, setWalletMeta] = useState<Cip30Wallet | null>(null);
   const [walletApi, setWalletApi] = useState<WalletApi | null>(null);
   const [lucid, setLucid] = useState<Lucid | null>(null);
+  const [network, setNetwork] = useState<CardanoNetwork>(
+    CardanoNetwork.Preview
+  );
 
   const globalContext: GlobalContextState = {
     walletMeta,
@@ -37,10 +44,13 @@ export default function GlobalContextProvider({
     setWalletApi,
     lucid,
     setLucid,
+    network,
   };
 
   async function initLucid() {
-    setLucid(await Lucid.new(new Blockfrost(), "Mainnet"));
+    const { network } = await BffService.getConfig();
+    setNetwork(network);
+    setLucid(await Lucid.new(new Blockfrost(), network));
   }
 
   useEffect(() => {

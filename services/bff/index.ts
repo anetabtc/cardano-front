@@ -3,7 +3,7 @@ import { Dto } from "../../utils/dto";
 
 export namespace BffService {
   export async function getConfig() {
-    const url = "/api/cosnfig";
+    const url = "/api/config";
     const res = await axios<Dto.GetConfig["response"]>({
       url,
     });
