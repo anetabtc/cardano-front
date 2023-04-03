@@ -4,8 +4,11 @@ import { CardanoNetwork, isValidNetwork } from "../../utils/api";
 import { Dto } from "../../utils/dto";
 
 const CARDANO_NETWORK = process.env.CARDANO_NETWORK;
-const BTC_WRAP_ADDRESS = process.env.BTC_WRAP_ADDRESS;
-const BTC_UNWRAP_ADDRESS = process.env.BTC_UNWRAP_ADDRESS;
+const BTC_WRAP_ADDRESS = process.env.BTC_WRAP_ADDRESS ?? "";
+const BTC_UNWRAP_ADDRESS = process.env.BTC_UNWRAP_ADDRESS ?? "";
+const WRAP_FEE_BTC = Number(process.env.WRAP_FEE_BTC ?? 0);
+const UNWRAP_FEE_BTC = Number(process.env.UNWRAP_FEE_BTC ?? 0);
+const UNWRAP_FEE_CARDANO = Number(process.env.UNWRAP_FEE_CARDANO ?? 0);
 
 export default function handler(
   _: NextApiRequest,
@@ -19,7 +22,10 @@ export default function handler(
 
   res.status(200).json({
     network,
-    btcWrapAddress: BTC_WRAP_ADDRESS ?? "",
-    btcUnwrapAddress: BTC_UNWRAP_ADDRESS ?? "",
+    btcWrapAddress: BTC_WRAP_ADDRESS,
+    btcUnwrapAddress: BTC_UNWRAP_ADDRESS,
+    wrapFeeBtc: WRAP_FEE_BTC,
+    unwrapFeeBtc: UNWRAP_FEE_BTC,
+    unwrapFeeCardano: UNWRAP_FEE_CARDANO,
   });
 }

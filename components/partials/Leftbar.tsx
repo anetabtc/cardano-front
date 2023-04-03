@@ -17,7 +17,7 @@ const Leftbar = () => {
   const [isShowing, setIsShowing] = useState<boolean>(true);
   const router = useRouter();
 
-  const { network } = useContext(GlobalContext);
+  const { config } = useContext(GlobalContext);
 
   return (
     <div className={styles.maincontainer}>
@@ -43,7 +43,7 @@ const Leftbar = () => {
       >
         <div>
           <div className={styles.navigationContainer}>
-            {network !== CardanoNetwork.Mainnet ? (
+            {config.network !== CardanoNetwork.Mainnet ? (
               <div className="flex justify-center">
                 <h2 className={styles.testnet}>Testnet</h2>
               </div>

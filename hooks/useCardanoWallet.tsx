@@ -14,12 +14,12 @@ export default function useCardanoWallet() {
   );
 
   async function updateWalletAddress() {
-    const { walletApi, lucid, network } = globalContext;
+    const { walletApi, lucid, config } = globalContext;
     if (walletApi && lucid) {
       lucid.selectWallet(walletApi as any);
       const address = await lucid.wallet.address();
       setWalletAddress(
-        doesAddressMatchNetwork(address, network)
+        doesAddressMatchNetwork(address, config.network)
           ? shortenAddress(address)
           : CONSTANTS.STRINGS.wrong_network
       );

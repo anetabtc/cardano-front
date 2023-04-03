@@ -1,4 +1,4 @@
-import { CardanoNetwork } from "./api";
+import { Config } from ".";
 
 export namespace Dto {
   export interface Base {
@@ -8,10 +8,6 @@ export namespace Dto {
   }
 
   export interface GetConfig extends Base {
-    response: {
-      network: CardanoNetwork;
-      btcWrapAddress: string;
-      btcUnwrapAddress: string;
-    };
+    response: Config;
   }
 }

@@ -13,7 +13,7 @@ interface Props {
 }
 
 const BtcDeposit = ({ isOpen, setIsOpen, closeAllModal, wrap }: Props) => {
-  const { btcWrapAddress } = useContext(GlobalContext);
+  const { config } = useContext(GlobalContext);
   const [viewAddress, setViewAddress] = useState<boolean>(false);
   const [addErgAddress, setAddErgAddress] = useState(false);
   const [showTxId, setShowTxId] = useState(false);
@@ -91,7 +91,7 @@ const BtcDeposit = ({ isOpen, setIsOpen, closeAllModal, wrap }: Props) => {
                         } w-full text-sm py-0.5 px-8 border border-neutral-400 rounded-lg flex items-center gap-1 flex justify-center`}
                       >
                         {viewAddress ? (
-                          <p className="py-2">{btcWrapAddress}</p>
+                          <p className="py-2">{config.btcWrapAddress}</p>
                         ) : (
                           <button
                             onClick={() => setViewAddress(true)}
