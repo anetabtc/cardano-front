@@ -28,6 +28,9 @@
 .wrapBtc {
   @apply bg-primary-blue-color hover:bg-primary-blue-color/80 transition-all flex items-center gap-2 justify-center  font-semibold font-nunito-sans text-gray-50 w-full text-center p-3 rounded-lg text-base;
 }
+.wrapBtc:disabled {
+  @apply opacity-60
+}
 .enterAmountBtc {
   @apply bg-primary-blue-color opacity-60 text-gray-50 w-full text-center p-3 rounded-lg text-base;
 }

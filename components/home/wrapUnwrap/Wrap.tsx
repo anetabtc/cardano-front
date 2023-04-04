@@ -1,9 +1,10 @@
 import Image from "next/image";
-import React, { Fragment, useState } from "react";
+import { Fragment, useState } from "react";
+import useWrap from "../../../hooks/useWrap";
 import styles from "../../../styles/home/WrapUnwrap.module.css";
+import ButtonLoader from "../../partials/loader/ButtonLoader";
 import Notifications from "./Notifications";
 import BtcDeposit from "./wrap/BtcDeposit";
-import ButtonLoader from "../../partials/loader/ButtonLoader";
 
 interface Props {
   payBridgeModalOpen: boolean;
@@ -18,9 +19,9 @@ const Wrap = ({ payBridgeModalOpen, setPayBridgeModalOpen }: Props) => {
   const [buttonLoader, setButtonLoader] = useState<boolean>(false);
   const [btcDepositSuccessOpen, setBtcDepositSuccessOpen] =
     useState<boolean>(false);
-  const [amount, setAmount] = useState<
-    string | number | readonly string[] | undefined
-  >();
+
+  const { amount, setAmount, wrapFeeBtc, btcToBeReceived, bridgeFee } =
+    useWrap();
 
   const closeAllModal = () => {
     setSuccessNotify(false);
@@ -28,26 +29,16 @@ const Wrap = ({ payBridgeModalOpen, setPayBridgeModalOpen }: Props) => {
     setBtcDepositSuccessOpen(false);
   };
 
-  React.useEffect(() => {
-    if (successNotify) {
-      setPayBridgeModalOpen(false);
-      setBtcDepositOpen(true);
-    }
-  }, [successNotify]);
-
   return (
     <Fragment>
-      <p className={styles.redeemBtc}>Redeem BTC</p>
-
-      {/* amount field  */}
-
+      <p className={styles.redeemBtc}>Wrap BTC</p>
+      {/* Wrap BTC Input */}
       <div className={styles.amountContainer}>
         <input
           placeholder="0"
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
           type="number"
-          inputMode="text"
           className={styles.amountInput}
         />
         <div className="absolute right-6">
@@ -58,19 +49,27 @@ const Wrap = ({ payBridgeModalOpen, setPayBridgeModalOpen }: Props) => {
               width={25}
               height={25}
             />
-            <h2 className=" font-medium font-nunito-sans">BTC</h2>
           </div>
-          {amount && (
-            <p className=" text-xs text-gray-300 font-semibold mt-1">
-              ~ $ 5159.16
-            </p>
-          )}
         </div>
       </div>
-
+      {/* fee */}
+      <div className="flex items-center justify-between px-2">
+        <p className="text-sm font-semibold">Bridge Fee ({wrapFeeBtc}%)</p>
+        <div>
+          <div className="flex items-center gap-2 text-lg">
+            <Image
+              src={"/images/logo/bitcoin.png"}
+              alt="Bitcoin"
+              height={25}
+              width={25}
+            />
+            {bridgeFee}
+            <h2 className="font-medium font-nunito-sans">BTC</h2>
+          </div>
+        </div>
+      </div>
       {/* my receive amount  */}
-
-      <div className={styles.receiveAmountContainer}>
+      <div className="flex items-center justify-between px-2">
         <p className="text-sm font-semibold">You Will Receive</p>
         <div>
           <div className="flex items-center gap-2 text-lg">
@@ -80,70 +79,37 @@ const Wrap = ({ payBridgeModalOpen, setPayBridgeModalOpen }: Props) => {
               height={25}
               width={25}
             />
-            {amount ? (
-              <p className="">{0.995 * Number(amount) - 0.0001}</p>
-            ) : (
-              <p className=" opacity-80">0.0</p>
-            )}
-            <h2 className="font-medium font-nunito-sans">eBTC</h2>
+            {btcToBeReceived}
+            <h2 className="font-medium font-nunito-sans">cBTC</h2>
           </div>
-          {amount && <p className={styles.totalEbtc}>= $ 5157.70</p>}
         </div>
       </div>
 
-      {/* bridge fee and cardano network fee  */}
-
-      <div className={styles.bridgeFee}>
-        <div className="flex items-center justify-between">
-          <h4>Bridge Fee (0.5%)</h4>
-          <div>
-            <div className="flex items-center gap-2">
-              <Image
-                src={"/images/logo/bitcoin.png"}
-                alt="Circle star"
-                width={25}
-                height={25}
-              />
-              <p>{amount ? 0.005 * Number(amount) + 0.0001 : "0.0"} ₳</p>
-            </div>
-            {amount && <p className="text-[13px] text-right mt-1">= $ 13.63</p>}
-          </div>
-        </div>
-        {/* notification of success  */}
-        <Notifications
-          success={true}
-          isShow={successNotify}
-          setIsShow={setSuccessNotify}
-        />
-        {/* btc deposit modal */}
-        <BtcDeposit
-          isOpen={btcDepositOpen}
-          setIsOpen={setBtcDepositOpen}
-          setBtcDepositSuccessOpen={setBtcDepositSuccessOpen}
-          closeAllModal={closeAllModal}
-          wrap={true}
-        />
-      </div>
       {/* final button  */}
-      {amount ? (
-        <button
-          disabled={buttonLoader}
-          onClick={() => {
-            setButtonLoader(true);
-            setTimeout(() => {
-              setBtcDepositOpen(true);
-              setButtonLoader(false);
-            }, 2000);
-          }}
-          className={styles.wrapBtc}
-        >
-          {buttonLoader && <ButtonLoader />} Wrap BTC
-        </button>
-      ) : (
-        <button disabled={true} className={styles.enterAmountBtc}>
-          Enter an amount
-        </button>
-      )}
+      <button
+        disabled={!Boolean(amount)}
+        onClick={() => setBtcDepositOpen(true)}
+        className={styles.wrapBtc}
+      >
+        {buttonLoader && <ButtonLoader />}
+        {amount ? "Wrap BTC" : "Enter an amount"}
+      </button>
+
+      {/* notification of success  */}
+      <Notifications
+        success={true}
+        isShow={successNotify}
+        setIsShow={setSuccessNotify}
+      />
+
+      {/* btc deposit modal */}
+      <BtcDeposit
+        isOpen={btcDepositOpen}
+        setIsOpen={setBtcDepositOpen}
+        setBtcDepositSuccessOpen={setBtcDepositSuccessOpen}
+        closeAllModal={closeAllModal}
+        wrap={true}
+      />
     </Fragment>
   );
 };
