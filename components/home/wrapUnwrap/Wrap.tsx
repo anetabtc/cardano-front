@@ -57,14 +57,14 @@ const Wrap = ({ payBridgeModalOpen, setPayBridgeModalOpen }: Props) => {
         <p className="text-sm font-semibold">Bridge Fee ({wrapFeeBtc}%)</p>
         <div>
           <div className="flex items-center gap-2 text-lg">
+            {bridgeFee}
+            <h2 className="font-medium font-nunito-sans">BTC</h2>
             <Image
               src={"/images/logo/bitcoin.png"}
               alt="Bitcoin"
               height={25}
               width={25}
             />
-            {bridgeFee}
-            <h2 className="font-medium font-nunito-sans">BTC</h2>
           </div>
         </div>
       </div>
@@ -73,14 +73,14 @@ const Wrap = ({ payBridgeModalOpen, setPayBridgeModalOpen }: Props) => {
         <p className="text-sm font-semibold">You Will Receive</p>
         <div>
           <div className="flex items-center gap-2 text-lg">
+            {btcToBeReceived}
+            <h2 className="font-medium font-nunito-sans">cBTC</h2>
             <Image
               src={"/images/logo/bitcoin-blue.png"}
               alt="Bitcoin Blue Image for Receiving amount"
               height={25}
               width={25}
             />
-            {btcToBeReceived}
-            <h2 className="font-medium font-nunito-sans">cBTC</h2>
           </div>
         </div>
       </div>

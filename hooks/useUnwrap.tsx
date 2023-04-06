@@ -10,8 +10,6 @@ export default function useUnwrap() {
   const [bridgeFee, setBridgeFee] = useState(0);
 
   useEffect(() => {
-    // const cardanoFee
-    // const
     const fee = unwrapFeeBtc * 0.01 * Number(amount);
     setBridgeFee(fee);
   }, [unwrapFeeBtc, amount]);
@@ -20,6 +18,7 @@ export default function useUnwrap() {
     amount,
     setAmount,
     unwrapFeeBtc,
+    unwrapFeeCardano,
     bridgeFee,
     btcToBeReceived: Number(amount) - bridgeFee,
   };

@@ -1,11 +1,11 @@
-import Image from "next/image";
-import React, { Fragment, useState, useRef } from "react";
-import styles from "../../../styles/home/WrapUnwrap.module.css";
 import { validate } from "bitcoin-address-validation";
-import ConfirmUnwrap from "./unwrap/ConfirmUnwrap";
+import Image from "next/image";
+import { Fragment, useEffect, useRef, useState } from "react";
+import useUnwrap from "../../../hooks/useUnwrap";
+import styles from "../../../styles/home/WrapUnwrap.module.css";
+import ButtonLoader from "../../partials/loader/ButtonLoader";
 import Notifications from "./Notifications";
 import UnwrapTransactionSuccessfull from "./unwrap/UnwrapTransactionSuccessfull";
-import ButtonLoader from "../../partials/loader/ButtonLoader";
 
 interface Props {
   payBridgeModalOpen: boolean;
@@ -23,12 +23,18 @@ const Unwrap = ({
   const [successResultModal, setSuccessResultModal] = useState<boolean>(false);
   const [btcAddress, setBtcAddress] = useState<string>("");
   const [buttonLoader, setButtonLoader] = useState<boolean>(false);
-  const [amount, setAmount] = useState<
-    string | number | readonly string[] | undefined
-  >();
   const hasRendered = useRef(false);
 
-  React.useEffect(() => {
+  const {
+    unwrapFeeBtc,
+    bridgeFee,
+    unwrapFeeCardano,
+    btcToBeReceived,
+    amount,
+    setAmount,
+  } = useUnwrap();
+
+  useEffect(() => {
     if (successNotify) {
       setPayBridgeModalOpen(false);
       setSuccessResultModal(true);
@@ -37,7 +43,8 @@ const Unwrap = ({
 
   return (
     <Fragment>
-      <p className={styles.redeemBtc}>Redeem BTC</p>
+      <p className={styles.redeemBtc}>Unwrap BTC</p>
+
       {/* amount field  */}
       <div className={styles.amountContainer}>
         <input
@@ -56,22 +63,12 @@ const Unwrap = ({
               width={25}
               height={25}
             />
-            <h2 className=" font-medium font-nunito-sans">cBTC</h2>
           </div>
-          {amount && (
-            <p className=" text-xs text-gray-300 font-semibold mt-1">
-              ~ $ 5159.16
-            </p>
-          )}
         </div>
       </div>
 
       {/* source address  */}
-
       <div>
-        <label className="text-xs text-gray-100" htmlFor="btc-address">
-          BTC Destination Address
-        </label>
         <input
           value={btcAddress}
           onChange={(e) => {
@@ -80,86 +77,61 @@ const Unwrap = ({
           }}
           type={"text"}
           placeholder="Enter your BTC address"
-          className={styles.btcAddressInput}
+          className="w-full text-gray-300 bg-primary-mid-dark-color p-4 rounded-lg outline-none mt-1"
           required
         />
       </div>
 
+      {/* fee */}
+      <div className="flex items-center justify-between px-2">
+        <p className="text-sm font-semibold">Bridge Fee ({unwrapFeeBtc}%)</p>
+        <div>
+          <div className="flex items-center gap-2 text-lg">
+            {bridgeFee}
+            <h2 className="font-medium font-nunito-sans">cBTC</h2>
+            <Image
+              src={"/images/logo/bitcoin-blue.png"}
+              alt="Bitcoin"
+              height={25}
+              width={25}
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* fee */}
+      <div className="flex items-center justify-between px-2">
+        <p className="text-sm font-semibold">Cardano Transaction Fee</p>
+        <div>
+          <div className="flex items-center gap-2 text-lg">
+            {unwrapFeeCardano}
+            <h2 className="font-medium font-nunito-sans">ADA</h2>
+            <Image
+              src={"/images/logo/star.png"}
+              alt="Bitcoin"
+              height={25}
+              width={25}
+            />
+          </div>
+        </div>
+      </div>
+
       {/* my receive amount  */}
 
-      <div className={styles.receiveAmountContainer}>
+      <div className="flex items-center justify-between px-2">
         <p className="text-sm font-semibold">You Will Receive</p>
         <div>
           <div className="flex items-center gap-2 text-lg">
+            <p className=" opacity-80">{btcToBeReceived}</p>
+            <h2 className="font-medium font-nunito-sans">BTC</h2>
             <Image
               src={"/images/logo/bitcoin.png"}
               alt="Bitcoin Image for Receiving amount"
               height={25}
               width={25}
             />
-            <p className=" opacity-80">
-              ~ {amount ? 0.995 * Number(amount) - 0.0001 : "0.0"}
-            </p>
-            <h2 className="font-medium font-nunito-sans">BTC</h2>
-          </div>
-          {amount && <p className={styles.totalEbtc}>= $ 5157.70</p>}
-        </div>
-      </div>
-
-      {/* bridge fee and cardano network fee  */}
-
-      <div className={styles.bridgeFee}>
-        <div className="flex  justify-between">
-          <h3>Bridge Fee</h3>
-          <div>
-            <div className="flex items-center justify-center gap-3">
-              <div className="flex items-center gap-2">
-                <Image
-                  src={"/images/logo/bitcoin-blue.png"}
-                  alt="Circle star"
-                  width={25}
-                  height={25}
-                />
-                <p>{amount ? 0.005 * Number(amount) + 0.0001 : "0.0"} cBTC</p>
-              </div>
-              <p>+</p>
-              <div className="flex items-center gap-2">
-                <Image
-                  src={"/images/assets/m.png"}
-                  alt="Circle star"
-                  width={25}
-                  height={25}
-                />
-                <p>0.05 ERG</p>
-              </div>
-            </div>
-            {amount && <p className="text-[13px] text-right mt-1">= $ 13.63</p>}
           </div>
         </div>
-        {/* <div className="flex items-center justify-between">
-          <h4>BTC Network Fee</h4>
-          <div>
-            <div className="flex items-center gap-2">
-              <Image
-                src={"/images/logo/bitcoin.png"}
-                alt="Bitcoin"
-                width={25}
-                height={25}
-              />
-              <p>~ 0.000085 ₿</p>
-            </div>
-            {amount && <p className="text-[13px] text-right mt-1">= $ 1.43</p>}
-          </div>
-        </div> */}
-
-        {validate(btcAddress) && (
-          <ConfirmUnwrap
-            isOpen={payBridgeModalOpen}
-            setIsOpen={setPayBridgeModalOpen}
-            setSuccessNotify={setSuccessNotify}
-            successNotify={successNotify}
-          />
-        )}
       </div>
 
       {/* success failed notifications  */}

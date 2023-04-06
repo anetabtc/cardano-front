@@ -11,10 +11,10 @@
   @apply relative  text-lg flex items-center justify-between;
 }
 .amountInput {
-  @apply text-3xl w-full text-gray-200 bg-primary-mid-dark-color py-6 pl-6 pr-28  rounded-2xl  outline-none;
+  @apply text-2xl w-full text-gray-200 bg-primary-mid-dark-color p-4 pr-28 rounded-2xl outline-none;
 }
 .btcAddressInput {
-  @apply w-full text-gray-300 text-sm bg-primary-mid-dark-color py-2.5 pl-[0.4rem] pr-2.5 rounded-lg outline-none mt-1 placeholder:text-xs;
+  @apply w-full text-gray-300 bg-primary-mid-dark-color py-2.5 pl-[0.4rem] pr-2.5 rounded-lg outline-none mt-1 placeholder:text-xs;
 }
 .receiveAmountContainer {
   @apply flex items-center justify-between px-2 py-2;
