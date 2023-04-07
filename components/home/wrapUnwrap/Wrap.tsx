@@ -2,31 +2,26 @@ import Image from "next/image";
 import { Fragment, useState } from "react";
 import useWrap from "../../../hooks/useWrap";
 import styles from "../../../styles/home/WrapUnwrap.module.css";
-import ButtonLoader from "../../partials/loader/ButtonLoader";
 import Notifications from "./Notifications";
 import BtcDeposit from "./wrap/BtcDeposit";
 
-interface Props {
-  payBridgeModalOpen: boolean;
-  setPayBridgeModalOpen: (value: boolean) => void;
-  setValidBtcAddress: (value: boolean) => void;
-  validAddress: boolean;
-}
-
-const Wrap = ({ payBridgeModalOpen, setPayBridgeModalOpen }: Props) => {
+const Wrap = () => {
   const [successNotify, setSuccessNotify] = useState<boolean>(false);
-  const [btcDepositOpen, setBtcDepositOpen] = useState<boolean>(false);
-  const [buttonLoader, setButtonLoader] = useState<boolean>(false);
-  const [btcDepositSuccessOpen, setBtcDepositSuccessOpen] =
-    useState<boolean>(false);
 
-  const { amount, setAmount, wrapFeeBtc, btcToBeReceived, bridgeFee } =
-    useWrap();
+  const {
+    amount,
+    setAmount,
+    wrapFeeBtc,
+    btcToBeReceived,
+    bridgeFee,
+    isBtcDepositModalOpen,
+    setIsBtcDepositModelOpen,
+    wrapDepositAddress,
+  } = useWrap();
 
   const closeAllModal = () => {
     setSuccessNotify(false);
-    setBtcDepositOpen(false);
-    setBtcDepositSuccessOpen(false);
+    setIsBtcDepositModelOpen(false);
   };
 
   return (
@@ -88,10 +83,9 @@ const Wrap = ({ payBridgeModalOpen, setPayBridgeModalOpen }: Props) => {
       {/* final button  */}
       <button
         disabled={!Boolean(amount)}
-        onClick={() => setBtcDepositOpen(true)}
+        onClick={() => setIsBtcDepositModelOpen(true)}
         className={styles.wrapBtc}
       >
-        {buttonLoader && <ButtonLoader />}
         {amount ? "Wrap BTC" : "Enter an amount"}
       </button>
 
@@ -104,11 +98,11 @@ const Wrap = ({ payBridgeModalOpen, setPayBridgeModalOpen }: Props) => {
 
       {/* btc deposit modal */}
       <BtcDeposit
-        isOpen={btcDepositOpen}
-        setIsOpen={setBtcDepositOpen}
-        setBtcDepositSuccessOpen={setBtcDepositSuccessOpen}
-        closeAllModal={closeAllModal}
-        wrap={true}
+        isOpen={isBtcDepositModalOpen}
+        setIsOpen={setIsBtcDepositModelOpen}
+        depositAmount={amount}
+        toReceiveAmount={btcToBeReceived.toString()}
+        depositAddress={wrapDepositAddress}
       />
     </Fragment>
   );

@@ -1,32 +1,23 @@
 import { Dialog, Transition } from "@headlessui/react";
-import {
-  CheckCircleIcon,
-  QuestionMarkCircleIcon,
-} from "@heroicons/react/24/outline";
-import { XMarkIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
-import React, { Fragment } from "react";
-import WaitingConfirmation from "../WaitingConfirmation";
-import { BsCheck2 } from "react-icons/bs";
+import { Fragment } from "react";
 
 interface Props {
   isOpen: boolean;
-  setIsOpen: (value: boolean) => void;
-  closeAllModal: any;
+  closeAll: any;
+  depositAmount: string;
+  toReceiveAmount: string;
 }
 
 const BtcDepositReceivedSuccess = ({
   isOpen,
-  setIsOpen,
-  closeAllModal,
+  closeAll,
+  depositAmount,
+  toReceiveAmount,
 }: Props) => {
-  const closeModal = () => {
-    setIsOpen(false);
-  };
-
   return (
     <Transition appear show={isOpen} as={Fragment}>
-      <Dialog as="div" className="relative z-20" onClose={closeModal}>
+      <Dialog as="div" className="relative z-20" onClose={closeAll}>
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"
@@ -70,7 +61,9 @@ const BtcDepositReceivedSuccess = ({
                           />
                           <p>BTC</p>
                         </div>
-                        <p className="text-lg font-nunito-sans">0.5</p>
+                        <p className="text-lg font-nunito-sans">
+                          {depositAmount}
+                        </p>
                       </div>
                       <Image
                         src={"/images/assets/right-arrow.png"}
@@ -87,9 +80,11 @@ const BtcDepositReceivedSuccess = ({
                             height={20}
                             width={20}
                           />
-                          <p>BTC</p>
+                          <p>cBTC</p>
                         </div>
-                        <p className="text-lg font-nunito-sans">0.5</p>
+                        <p className="text-lg font-nunito-sans">
+                          {toReceiveAmount}
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -97,7 +92,7 @@ const BtcDepositReceivedSuccess = ({
                     Thank you for sending your BTC Deposit.
                   </p>
                   <p className="text-xs text-neutral-300 font-nunito-sans text-center mb-2 leading-relaxed max-w-[320px] mx-auto">
-                    eBTC will be sent to your Cardano wallet once your BTC
+                    cBTC will be sent to your Cardano wallet once your BTC
                     deposit is confirmed. This process may take up to 24 hours.
                   </p>
                   {/* btc address */}
@@ -112,21 +107,17 @@ const BtcDepositReceivedSuccess = ({
                     </p>
                   </div> */}
 
-                  <p className="text-xs text-neutral-300 font-nunito-sans text-center leading-relaxed max-w-[320px] mx-auto">
+                  {/* <p className="text-xs text-neutral-300 font-nunito-sans text-center leading-relaxed max-w-[320px] mx-auto">
                     The status and details of this transaction can be found in
                     the “Transactions” tab on the side menu.
-                  </p>
+                  </p> */}
 
                   <div className="rounded-lg text-center p-4 bg-primary-mid-dark-color font-nunito-sans text-xs space-y-1">
-                    <h3 className="font-semibold text-[13px] mb-3">Support</h3>
-                    If you need support, your BTC transaction ID and your ERG
-                    transaction ID will help us assist you.
+                    If you need support, send your BTC transaction ID and your
+                    Cardano address and we will help you
                   </div>
                   <button
-                    onClick={() => {
-                      closeModal();
-                      closeAllModal();
-                    }}
+                    onClick={closeAll}
                     className={
                       "bg-primary-blue-color hover:bg-primary-blue-color/80 transition-all text-gray-50 w-full text-center p-3 rounded-lg text-sm font-semibold font-nunito-sans"
                     }
