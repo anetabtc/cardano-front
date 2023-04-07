@@ -8,16 +8,12 @@ export default function useWrap() {
 
   const [amount, setAmount] = useState<string>("");
   const [bridgeFee, setBridgeFee] = useState(0);
-  const [isBtcDepositModalOpen, setIsBtcDepositModelOpen] = useState(true);
+  const [isBtcDepositModalOpen, setIsBtcDepositModelOpen] = useState(false);
 
   useEffect(() => {
     const fee = wrapFeeBtc * 0.01 * Number(amount);
     setBridgeFee(fee);
   }, [wrapFeeBtc, amount]);
-
-  const wrap = async () => {};
-
-  const validateInput = () => {};
 
   return {
     amount,

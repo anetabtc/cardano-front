@@ -1,9 +1,7 @@
-import { validate } from "bitcoin-address-validation";
 import Image from "next/image";
-import { Fragment, useEffect, useRef, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import useUnwrap from "../../../hooks/useUnwrap";
 import styles from "../../../styles/home/WrapUnwrap.module.css";
-import ButtonLoader from "../../partials/loader/ButtonLoader";
 import Notifications from "./Notifications";
 import UnwrapTransactionSuccessfull from "./unwrap/UnwrapTransactionSuccessfull";
 
@@ -21,9 +19,6 @@ const Unwrap = ({
 }: Props) => {
   const [successNotify, setSuccessNotify] = useState<boolean>(false);
   const [successResultModal, setSuccessResultModal] = useState<boolean>(false);
-  const [btcAddress, setBtcAddress] = useState<string>("");
-  const [buttonLoader, setButtonLoader] = useState<boolean>(false);
-  const hasRendered = useRef(false);
 
   const {
     unwrapFeeBtc,
@@ -32,6 +27,9 @@ const Unwrap = ({
     btcToBeReceived,
     amount,
     setAmount,
+    unwrap,
+    unwrapBtcDestination,
+    setUnwrapBtcDestination,
   } = useUnwrap();
 
   useEffect(() => {
@@ -43,7 +41,7 @@ const Unwrap = ({
 
   return (
     <Fragment>
-      <p className={styles.redeemBtc}>Unwrap BTC</p>
+      <p className={styles.redeemBtc}>Unwrap cBTC</p>
 
       {/* amount field  */}
       <div className={styles.amountContainer}>
@@ -70,12 +68,9 @@ const Unwrap = ({
       {/* source address  */}
       <div>
         <input
-          value={btcAddress}
-          onChange={(e) => {
-            setValidBtcAddress(validate(e.target.value));
-            setBtcAddress(e.target.value);
-          }}
-          type={"text"}
+          value={unwrapBtcDestination}
+          onChange={(e) => setUnwrapBtcDestination(e.target.value)}
+          type="text"
           placeholder="Enter your BTC address"
           className="w-full text-gray-300 bg-primary-mid-dark-color p-4 rounded-lg outline-none mt-1"
           required
@@ -154,11 +149,10 @@ const Unwrap = ({
       {/* final button  */}
       <button
         disabled={!Boolean(amount)}
-        onClick={() => setPayBridgeModalOpen(true)}
+        onClick={() => unwrap()}
         className={styles.wrapBtc}
       >
-        {buttonLoader && <ButtonLoader />}
-        {amount ? "Unwrap BTC" : "Enter an amount"}
+        {amount ? "Unwrap cBTC" : "Enter an amount"}
       </button>
     </Fragment>
   );

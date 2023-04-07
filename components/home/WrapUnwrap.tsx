@@ -46,12 +46,7 @@ const WrapUnwrap = () => {
           validAddress={btcValidAddressFinal}
         />
       ) : (
-        <Wrap
-          setValidBtcAddress={setValidBtcAddress}
-          validAddress={btcValidAddressFinal}
-          payBridgeModalOpen={payBridgeModalOpen}
-          setPayBridgeModalOpen={setPayBridgeModalOpen}
-        />
+        <Wrap />
       )}
       <InvalidBTCAddressModal
         isOpen={btcValidAddressFinal == false}

@@ -2,44 +2,39 @@ import {
   Constr,
   Data,
   fromText,
-  Lucid,
   Script,
   toUnit,
   WalletApi,
 } from "lucid-cardano";
+import { useContext } from "react";
+import { GlobalContext } from "../components/GlobalContext";
+import { useTryCatch } from "./useTryCatch";
 
 export default function useLucid() {
-  async function transferAda({
-    lucid,
-    walletApi,
-    toAddress,
-    amount,
-  }: {
-    lucid: Lucid;
-    walletApi: WalletApi;
-    toAddress: string;
-    amount: number;
-  }) {
-    try {
-      // const lucid = await Lucid.new(new CustomBlockfrost(), "Mainnet");
-      lucid.selectWallet(walletApi);
-      const tx = await lucid
-        .newTx()
-        .payToAddress(toAddress, { lovelace: BigInt(amount) })
-        .complete();
-      const signedTx = await tx.sign().complete();
-      const txHash = await signedTx.submit();
-      return txHash;
-    } catch (error) {}
-  }
+  const { tryWithErrorHandler } = useTryCatch();
 
-  const burn = async (
-    lucid: Lucid,
-    burnAmount: number,
-    btcAddress: string,
-    cBTCMintingPolicy: Script
-  ) => {
-    try {
+  const { lucid, walletApi } = useContext(GlobalContext);
+
+  const unwrap = async ({
+    burnAmount,
+    btcAddress,
+    cBTCMintingPolicy,
+  }: {
+    burnAmount: number;
+    btcAddress: string;
+    cBTCMintingPolicy: Script;
+  }) => {
+    await tryWithErrorHandler(async () => {
+      if (!walletApi) {
+        throw new Error("No wallet connected");
+      }
+
+      if (!lucid) {
+        throw new Error("Fail to initialize Lucid");
+      }
+
+      lucid.selectWallet(walletApi as unknown as WalletApi);
+
       const unit = toUnit(
         lucid.utils.mintingPolicyToId(cBTCMintingPolicy),
         fromText("cBTC")
@@ -63,11 +58,8 @@ export default function useLucid() {
 
       const txHash = signedTx.submit();
       return txHash;
-    } catch (error) {
-      if (error instanceof Error) return error;
-      return Error(`error : ${JSON.stringify(error)}`);
-    }
+    });
   };
 
-  return { transferAda };
+  return { unwrap };
 }
