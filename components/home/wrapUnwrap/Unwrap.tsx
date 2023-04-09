@@ -1,25 +1,11 @@
 import Image from "next/image";
-import { Fragment, useEffect, useState } from "react";
-import useUnwrap from "../../../hooks/useUnwrap";
+import { Fragment } from "react";
+import useUnwrap, { UnwrapStage } from "../../../hooks/useUnwrap";
 import styles from "../../../styles/home/WrapUnwrap.module.css";
-import Notifications from "./Notifications";
-import UnwrapTransactionSuccessfull from "./unwrap/UnwrapTransactionSuccessfull";
+import ButtonLoader from "../../partials/loader/ButtonLoader";
+import UnwrapSuccessful from "./unwrap/UnwrapSuccessful";
 
-interface Props {
-  payBridgeModalOpen: boolean;
-  setPayBridgeModalOpen: (value: boolean) => void;
-  setValidBtcAddress: (value: boolean) => void;
-  validAddress: boolean;
-}
-
-const Unwrap = ({
-  payBridgeModalOpen,
-  setPayBridgeModalOpen,
-  setValidBtcAddress,
-}: Props) => {
-  const [successNotify, setSuccessNotify] = useState<boolean>(false);
-  const [successResultModal, setSuccessResultModal] = useState<boolean>(false);
-
+const Unwrap = () => {
   const {
     unwrapFeeBtc,
     bridgeFee,
@@ -30,14 +16,10 @@ const Unwrap = ({
     unwrap,
     unwrapBtcDestination,
     setUnwrapBtcDestination,
+    isLoading,
+    unwrapStage,
+    setUnwrapStage,
   } = useUnwrap();
-
-  useEffect(() => {
-    if (successNotify) {
-      setPayBridgeModalOpen(false);
-      setSuccessResultModal(true);
-    }
-  }, [successNotify]);
 
   return (
     <Fragment>
@@ -79,7 +61,7 @@ const Unwrap = ({
 
       {/* fee */}
       <div className="flex items-center justify-between px-2">
-        <p className="text-sm font-semibold">Bridge Fee ({unwrapFeeBtc}%)</p>
+        <p className=" font-semibold">Bridge Fee ({unwrapFeeBtc}%)</p>
         <div>
           <div className="flex items-center gap-2 text-lg">
             {bridgeFee}
@@ -96,7 +78,7 @@ const Unwrap = ({
 
       {/* fee */}
       <div className="flex items-center justify-between px-2">
-        <p className="text-sm font-semibold">Cardano Transaction Fee</p>
+        <p className=" font-semibold">Cardano Transaction Fee</p>
         <div>
           <div className="flex items-center gap-2 text-lg">
             {unwrapFeeCardano}
@@ -114,7 +96,7 @@ const Unwrap = ({
       {/* my receive amount  */}
 
       <div className="flex items-center justify-between px-2">
-        <p className="text-sm font-semibold">You Will Receive</p>
+        <p className=" font-semibold">You Will Receive</p>
         <div>
           <div className="flex items-center gap-2 text-lg">
             <p className=" opacity-80">{btcToBeReceived}</p>
@@ -128,32 +110,25 @@ const Unwrap = ({
           </div>
         </div>
       </div>
-
-      {/* success failed notifications  */}
-
-      <Notifications
-        success={true}
-        isShow={successNotify}
-        setIsShow={setSuccessNotify}
-      />
-
-      {/* success modal  */}
-
-      <UnwrapTransactionSuccessfull
-        isOpen={successResultModal}
-        setIsOpen={setSuccessResultModal}
-        setSuccessNotify={setSuccessNotify}
-        successNotify={successNotify}
-      />
-
       {/* final button  */}
       <button
         disabled={!Boolean(amount)}
-        onClick={() => unwrap()}
+        onClick={unwrap}
         className={styles.wrapBtc}
       >
+        {isLoading ? <ButtonLoader /> : null}
         {amount ? "Unwrap cBTC" : "Enter an amount"}
       </button>
+
+      {/* success modal  */}
+      <UnwrapSuccessful
+        isOpen={unwrapStage === UnwrapStage.Success}
+        amount={amount}
+        amountToReceive={btcToBeReceived.toString()}
+        unwrapBtcDestination={unwrapBtcDestination}
+        onClick={() => setUnwrapStage(UnwrapStage.NotStart)}
+        onClose={() => setUnwrapStage(UnwrapStage.NotStart)}
+      ></UnwrapSuccessful>
     </Fragment>
   );
 };

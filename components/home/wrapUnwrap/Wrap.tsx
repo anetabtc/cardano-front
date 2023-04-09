@@ -1,28 +1,24 @@
 import Image from "next/image";
-import { Fragment, useState } from "react";
-import useWrap from "../../../hooks/useWrap";
+import { Fragment } from "react";
+import useWrap, { WrapStage } from "../../../hooks/useWrap";
 import styles from "../../../styles/home/WrapUnwrap.module.css";
-import Notifications from "./Notifications";
-import BtcDeposit from "./wrap/BtcDeposit";
+import ButtonLoader from "../../partials/loader/ButtonLoader";
+import DepositSentModal from "./wrap/DepositSentModal";
+import SendDepositModal from "./wrap/SendDepositModal";
 
 const Wrap = () => {
-  const [successNotify, setSuccessNotify] = useState<boolean>(false);
-
   const {
     amount,
     setAmount,
     wrapFeeBtc,
     btcToBeReceived,
     bridgeFee,
-    isBtcDepositModalOpen,
-    setIsBtcDepositModelOpen,
     wrapDepositAddress,
+    wrap,
+    isLoading,
+    wrapStage,
+    setWrapStage,
   } = useWrap();
-
-  const closeAllModal = () => {
-    setSuccessNotify(false);
-    setIsBtcDepositModelOpen(false);
-  };
 
   return (
     <Fragment>
@@ -49,7 +45,7 @@ const Wrap = () => {
       </div>
       {/* fee */}
       <div className="flex items-center justify-between px-2">
-        <p className="text-sm font-semibold">Bridge Fee ({wrapFeeBtc}%)</p>
+        <p className=" font-semibold">Bridge Fee ({wrapFeeBtc}%)</p>
         <div>
           <div className="flex items-center gap-2 text-lg">
             {bridgeFee}
@@ -65,7 +61,7 @@ const Wrap = () => {
       </div>
       {/* my receive amount  */}
       <div className="flex items-center justify-between px-2">
-        <p className="text-sm font-semibold">You Will Receive</p>
+        <p className=" font-semibold">You Will Receive</p>
         <div>
           <div className="flex items-center gap-2 text-lg">
             {btcToBeReceived}
@@ -79,31 +75,30 @@ const Wrap = () => {
           </div>
         </div>
       </div>
-
       {/* final button  */}
       <button
         disabled={!Boolean(amount)}
-        onClick={() => setIsBtcDepositModelOpen(true)}
+        onClick={wrap}
         className={styles.wrapBtc}
       >
+        {isLoading ? <ButtonLoader /> : null}
+
         {amount ? "Wrap BTC" : "Enter an amount"}
       </button>
-
-      {/* notification of success  */}
-      <Notifications
-        success={true}
-        isShow={successNotify}
-        setIsShow={setSuccessNotify}
-      />
-
-      {/* btc deposit modal */}
-      <BtcDeposit
-        isOpen={isBtcDepositModalOpen}
-        setIsOpen={setIsBtcDepositModelOpen}
-        depositAmount={amount}
-        toReceiveAmount={btcToBeReceived.toString()}
-        depositAddress={wrapDepositAddress}
-      />
+      <SendDepositModal
+        isOpen={wrapStage === WrapStage.Pending}
+        amount={amount}
+        wrapDepositAddress={wrapDepositAddress}
+        onClick={() => setWrapStage(WrapStage.Sent)}
+        onClose={() => setWrapStage(WrapStage.NotStarted)}
+      ></SendDepositModal>
+      <DepositSentModal
+        isOpen={wrapStage === WrapStage.Sent}
+        amount={amount}
+        amountToReceive={btcToBeReceived.toString()}
+        onClick={() => setWrapStage(WrapStage.NotStarted)}
+        onClose={() => setWrapStage(WrapStage.NotStarted)}
+      ></DepositSentModal>
     </Fragment>
   );
 };

@@ -43,14 +43,14 @@ const BtcDepositReceivedSuccess = ({
             >
               <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl border border-neutral-800 bg-primary-full-dark-color p-4 text-left align-middle shadow-xl transition-all">
                 <div className="flex flex-col gap-4">
-                  <div className="flex items-center justify-between text-sm">
+                  <div className="flex items-center justify-between">
                     <h3 className=" font-semibold font-nunito-sans text-base flex items-center gap-2">
                       BTC Deposit
                     </h3>
                   </div>
                   {/* coin Price  */}
                   <div className=" mx-9">
-                    <div className="flex justify-between items-start py-2 text-sm">
+                    <div className="flex justify-between items-start py-2">
                       <div className="flex flex-col justify-center items-center gap-1">
                         <div className="flex items-center gap-2 bg-primary-mid-dark-color rounded-md border border-neutral-800 px-2.5 py-1.5 ">
                           <Image
@@ -88,15 +88,15 @@ const BtcDepositReceivedSuccess = ({
                       </div>
                     </div>
                   </div>
-                  <p className="text-xs text-neutral-300 font-nunito-sans text-center leading-relaxed max-w-[320px] mx-auto">
+                  <p className=" text-neutral-300 font-nunito-sans text-center leading-relaxed max-w-[320px] mx-auto">
                     Thank you for sending your BTC Deposit.
                   </p>
-                  <p className="text-xs text-neutral-300 font-nunito-sans text-center mb-2 leading-relaxed max-w-[320px] mx-auto">
+                  <p className=" text-neutral-300 font-nunito-sans text-center mb-2 leading-relaxed max-w-[320px] mx-auto">
                     cBTC will be sent to your Cardano wallet once your BTC
                     deposit is confirmed. This process may take up to 24 hours.
                   </p>
                   {/* btc address */}
-                  {/* <div className="rounded-lg p-4 bg-primary-mid-dark-color font-nunito-sans text-xs space-y-1">
+                  {/* <div className="rounded-lg p-4 bg-primary-mid-dark-color font-nunito-sans  space-y-1">
                     <div>
                       <h4 className="flex gap-1 items-center">
                         cBTC Destination Address:
@@ -107,19 +107,19 @@ const BtcDepositReceivedSuccess = ({
                     </p>
                   </div> */}
 
-                  {/* <p className="text-xs text-neutral-300 font-nunito-sans text-center leading-relaxed max-w-[320px] mx-auto">
+                  {/* <p className=" text-neutral-300 font-nunito-sans text-center leading-relaxed max-w-[320px] mx-auto">
                     The status and details of this transaction can be found in
                     the “Transactions” tab on the side menu.
                   </p> */}
 
-                  <div className="rounded-lg text-center p-4 bg-primary-mid-dark-color font-nunito-sans text-xs space-y-1">
+                  <div className="rounded-lg text-center p-4 bg-primary-mid-dark-color font-nunito-sans  space-y-1">
                     If you need support, send your BTC transaction ID and your
                     Cardano address and we will help you
                   </div>
                   <button
                     onClick={closeAll}
                     className={
-                      "bg-primary-blue-color hover:bg-primary-blue-color/80 transition-all text-gray-50 w-full text-center p-3 rounded-lg text-sm font-semibold font-nunito-sans"
+                      "bg-primary-blue-color hover:bg-primary-blue-color/80 transition-all text-gray-50 w-full text-center p-3 rounded-lg font-semibold font-nunito-sans"
                     }
                   >
                     Close

@@ -2,7 +2,7 @@
   @apply flex font-nunito-sans flex-col gap-4 bg-primary-full-dark-color w-11/12 lg:w-full max-w-md rounded-lg p-4;
 }
 .tabList {
-  @apply flex space-x-1 rounded-lg bg-black w-full;
+  @apply flex rounded-lg bg-black w-full;
 }
 .redeemBtc {
   @apply text-center text-gray-300 text-xs;
@@ -11,7 +11,7 @@
   @apply relative  text-lg flex items-center justify-between;
 }
 .amountInput {
-  @apply text-2xl w-full text-gray-200 bg-primary-mid-dark-color p-4 pr-28 rounded-2xl outline-none;
+  @apply text-2xl w-full text-gray-200 bg-primary-mid-dark-color p-4 pr-28 rounded-lg outline-none;
 }
 .btcAddressInput {
   @apply w-full text-gray-300 bg-primary-mid-dark-color py-2.5 pl-[0.4rem] pr-2.5 rounded-lg outline-none mt-1 placeholder:text-xs;

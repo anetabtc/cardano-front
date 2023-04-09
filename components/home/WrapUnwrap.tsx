@@ -38,16 +38,7 @@ const WrapUnwrap = () => {
           </Tab.List>
         </Tab.Group>
       </div>
-      {tabName == "Unwrap" ? (
-        <Unwrap
-          payBridgeModalOpen={payBridgeModalOpen}
-          setPayBridgeModalOpen={setPayBridgeModalOpen}
-          setValidBtcAddress={setValidBtcAddress}
-          validAddress={btcValidAddressFinal}
-        />
-      ) : (
-        <Wrap />
-      )}
+      {tabName == "Unwrap" ? <Unwrap /> : <Wrap />}
       <InvalidBTCAddressModal
         isOpen={btcValidAddressFinal == false}
         setIsOpen={setBtcValidAddressFinal}
