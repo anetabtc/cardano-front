@@ -43,7 +43,6 @@ export default function useUnwrap() {
       await lucidUnwrap({
         burnAmount: Number(amount),
         btcAddress: unwrapBtcDestination,
-        cBTCMintingPolicy: "" as any,
       });
 
       setUnwrapStage(UnwrapStage.Success);

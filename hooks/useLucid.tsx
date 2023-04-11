@@ -12,14 +12,13 @@ import { GlobalContext } from "../components/GlobalContext";
 export default function useLucid() {
   const { lucid, walletApi } = useContext(GlobalContext);
 
+  // TODO: please fix this function
   const unwrap = async ({
     burnAmount,
     btcAddress,
-    cBTCMintingPolicy,
   }: {
     burnAmount: number;
     btcAddress: string;
-    cBTCMintingPolicy: Script;
   }) => {
     if (!walletApi) {
       throw new Error("No wallet connected");
@@ -30,6 +29,11 @@ export default function useLucid() {
     }
 
     lucid.selectWallet(walletApi as unknown as WalletApi);
+
+    const cBTCMintingPolicy: Script = {
+      type: "PlutusV1",
+      script: "addr_test1wr2x24tlcpr37sjrscaqsh6z4tue3k7zx8qt8n0kscen2jct0wkz7",
+    };
 
     const unit = toUnit(
       lucid.utils.mintingPolicyToId(cBTCMintingPolicy),
