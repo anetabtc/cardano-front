@@ -2,12 +2,12 @@ import {
   Constr,
   Data,
   fromText,
-  Script,
   toUnit,
   WalletApi,
 } from "lucid-cardano";
 import { useContext } from "react";
 import { GlobalContext } from "../components/GlobalContext";
+import { cBTCMintingPolicy } from "./config"
 
 export default function useLucid() {
   const { lucid, walletApi } = useContext(GlobalContext);
@@ -29,11 +29,6 @@ export default function useLucid() {
     }
 
     lucid.selectWallet(walletApi as unknown as WalletApi);
-
-    const cBTCMintingPolicy: Script = {
-      type: "PlutusV1",
-      script: "addr_test1wr2x24tlcpr37sjrscaqsh6z4tue3k7zx8qt8n0kscen2jct0wkz7",
-    };
 
     const unit = toUnit(
       lucid.utils.mintingPolicyToId(cBTCMintingPolicy),
