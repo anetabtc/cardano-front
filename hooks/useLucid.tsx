@@ -2,17 +2,16 @@ import {
   Constr,
   Data,
   fromText,
-  Script,
   toUnit,
   WalletApi,
 } from "lucid-cardano";
 import { useContext } from "react";
 import { GlobalContext } from "../components/GlobalContext";
+import { cBTCMintingPolicy } from "./config"
 
 export default function useLucid() {
   const { lucid, walletApi } = useContext(GlobalContext);
 
-  // TODO: please fix this function
   const unwrap = async ({
     burnAmount,
     btcAddress,
@@ -30,11 +29,6 @@ export default function useLucid() {
 
     lucid.selectWallet(walletApi as unknown as WalletApi);
 
-    const cBTCMintingPolicy: Script = {
-      type: "PlutusV1",
-      script: "addr_test1wr2x24tlcpr37sjrscaqsh6z4tue3k7zx8qt8n0kscen2jct0wkz7",
-    };
-
     const unit = toUnit(
       lucid.utils.mintingPolicyToId(cBTCMintingPolicy),
       fromText("cBTC")
@@ -43,15 +37,18 @@ export default function useLucid() {
       await lucid.wallet.address(),
       unit
     );
+    if (!walletUtxos.length) {
+      throw new Error("cBTC not found in wallet");
+    }
     const redeemer = Data.to(new Constr(1, []));
 
-    const totalAssets = { [unit]: BigInt(burnAmount) };
+    const totalAssets = { [unit]: BigInt(-burnAmount) };
     const tx = await lucid
       .newTx()
       .collectFrom(walletUtxos)
       .attachMintingPolicy(cBTCMintingPolicy)
       .mintAssets(totalAssets, redeemer)
-      .attachMetadata(0, { btcAddress: btcAddress, burnAmount: burnAmount })
+      .attachMetadata(0, { btcAddress: btcAddress, burnAmount: -burnAmount })
       .complete();
 
     const signedTx = await tx.sign().complete();
