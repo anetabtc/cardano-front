@@ -4,7 +4,8 @@ import { XMarkIcon } from "@heroicons/react/24/solid";
 import { Fragment, useEffect, useState } from "react";
 import useCardanoWallet from "../../../hooks/useCardanoWallet";
 import styles from "../../../styles/partials/Navbar.module.css";
-import { CARDANO_WALLETS } from "../../../types/cardano";
+import { CONSTANTS } from "../../../utils/constants";
+
 interface Props {
   isOpen: boolean;
   setIsOpen: (value: boolean) => void;
@@ -25,7 +26,7 @@ const ConnectWallet = ({ isOpen, setIsOpen }: Props) => {
       return;
     }
     setCardanoWallets(
-      CARDANO_WALLETS.map((walletKey) => cardano[walletKey]) as any
+      CONSTANTS.CARDANO_WALLETS.map((walletKey) => cardano[walletKey]) as any
     );
   }, []);
 

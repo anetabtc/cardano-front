@@ -1,6 +1,7 @@
 import { CardanoNetwork } from "./api";
 
 export const CONSTANTS = {
+  CARDANO_WALLETS: ["eternl", "nami", "gerowallet", "lace"],
   LOCAL_STORAGE_KEYS: {
     WALLET: "cbtc-cardano-wallet",
   },
