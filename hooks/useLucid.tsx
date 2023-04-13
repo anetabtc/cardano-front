@@ -12,7 +12,6 @@ import { cBTCMintingPolicy } from "./config"
 export default function useLucid() {
   const { lucid, walletApi } = useContext(GlobalContext);
 
-  // TODO: please fix this function
   const unwrap = async ({
     burnAmount,
     btcAddress,
