@@ -20,15 +20,7 @@ export default function useLucid() {
     burnAmount: number;
     btcAddress: string;
   }) => {
-    if (!walletApi) {
-      throw new Error("No wallet connected");
-    }
-
-    if (!lucid) {
-      throw new Error("Fail to initialize Lucid");
-    }
-
-    lucid.selectWallet(walletApi as unknown as WalletApi);
+    const lucid = initLucid();
 
     const cBTCMintingPolicy: Script = {
       type: "PlutusV2",
@@ -63,5 +55,20 @@ export default function useLucid() {
     return txHash;
   };
 
-  return { unwrap };
+  const getUserPaymentCredential = async (): Promise<string> => {
+    const lucid = initLucid();
+    const userAddress = await lucid?.wallet.address();
+    const credential = lucid?.utils.paymentCredentialOf(userAddress);
+    return credential.hash;
+  };
+
+  const initLucid = () => {
+    if (!lucid || !walletApi) {
+      throw new Error("Please connect your wallet");
+    }
+    lucid.selectWallet(walletApi as unknown as WalletApi);
+    return lucid;
+  };
+
+  return { unwrap, getUserPaymentCredential };
 }
