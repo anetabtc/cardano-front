@@ -59,7 +59,7 @@ export default function useLucid() {
     const lucid = initLucid();
     const userAddress = await lucid?.wallet.address();
     const credential = lucid?.utils.paymentCredentialOf(userAddress);
-    return credential.hash;
+    return lucid.utils.credentialToAddress(credential);
   };
 
   const initLucid = () => {
