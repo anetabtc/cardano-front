@@ -17,9 +17,11 @@ export default function useLucid() {
     burnAmount,
     btcAddress,
   }: {
+    /** burnAmount is in btc, need to convert to sats */
     burnAmount: number;
     btcAddress: string;
   }) => {
+    const burnAmountInSats = burnAmount * Math.pow(10, 8);
     const lucid = initLucid();
 
     const cBTCMintingPolicy: Script = {
@@ -40,13 +42,16 @@ export default function useLucid() {
     }
     const redeemer = Data.to(new Constr(1, []));
 
-    const totalAssets = { [unit]: BigInt(-burnAmount) };
+    const totalAssets = { [unit]: BigInt(-burnAmountInSats) };
     const tx = await lucid
       .newTx()
       .collectFrom(walletUtxos)
       .attachMintingPolicy(cBTCMintingPolicy)
       .mintAssets(totalAssets, redeemer)
-      .attachMetadata(0, { btcAddress: btcAddress, burnAmount: -burnAmount })
+      .attachMetadata(0, {
+        btcAddress: btcAddress,
+        burnAmount: -burnAmountInSats,
+      })
       .complete();
 
     const signedTx = await tx.sign().complete();
