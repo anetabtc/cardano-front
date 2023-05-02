@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { QRCodeSVG } from "qrcode.react";
 import { useEffect, useState } from "react";
 import useLucid from "../../../../hooks/useLucid";
 import { useTryCatch } from "../../../../hooks/useTryCatch";
@@ -68,6 +69,9 @@ export default function SendDepositModal({
           you will not receive cBTC into your Cardano address.
         </p>
         <p>Then, in a single transaction, send {amount} BTC to</p>
+        <div className="flex justify-center">
+          <QRCodeSVG value={wrapDepositAddress}></QRCodeSVG>
+        </div>
         <div
           className={`w-full py-0.5 px-8 border border-neutral-400 rounded-lg flex items-center gap-1 flex justify-center`}
         >

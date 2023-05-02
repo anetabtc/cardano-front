@@ -9,7 +9,7 @@ export enum WrapStage {
 }
 
 export default function useWrap() {
-  const { config } = useContext(GlobalContext);
+  const { config, walletApi } = useContext(GlobalContext);
   const wrapFeeBtc = config.wrapFeeBtc;
   const wrapDepositAddress = config.btcWrapAddress;
 
@@ -27,6 +27,10 @@ export default function useWrap() {
 
   const wrap = async () => {
     await tryWithErrorHandler(() => {
+      if (walletApi == null) {
+        throw new Error("Wallet is not connected");
+      }
+
       setIsLoading(true);
       const amountNumber = Number(amount);
       if (isNaN(amountNumber) || amountNumber <= 0) {

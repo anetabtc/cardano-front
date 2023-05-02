@@ -41,14 +41,14 @@ export default function UnwrapSuccessful({
           <div className="flex flex-col justify-center items-center gap-1">
             <div className="flex items-center gap-2 bg-primary-mid-dark-color rounded-md border border-neutral-800 px-2.5 py-1.5 ">
               <Image
-                src={"/images/logo/bitcoin.png"}
-                alt="Bitcoin"
+                src={"/images/logo/bitcoin-blue.png"}
+                alt="Bitcoin blue"
                 height={20}
                 width={20}
               />
-              <p>BTC</p>
+              <p>cBTC</p>
             </div>
-            <p className="text-lg font-nunito-sans">{amount}</p>
+            <p className="text-lg font-nunito-sans">{amountToReceive}</p>
           </div>
           <Image
             src={"/images/assets/right-arrow.png"}
@@ -60,14 +60,14 @@ export default function UnwrapSuccessful({
           <div className="flex flex-col justify-center items-center gap-1">
             <div className="flex items-center gap-2 bg-primary-mid-dark-color rounded-md border border-neutral-800 px-2.5 py-1.5 ">
               <Image
-                src={"/images/logo/bitcoin-blue.png"}
-                alt="Bitcoin blue"
+                src={"/images/logo/bitcoin.png"}
+                alt="Bitcoin"
                 height={20}
                 width={20}
               />
-              <p>cBTC</p>
+              <p>BTC</p>
             </div>
-            <p className="text-lg font-nunito-sans">{amountToReceive}</p>
+            <p className="text-lg font-nunito-sans">{amount}</p>
           </div>
         </div>
         <div className="rounded-lg p-4 bg-primary-mid-dark-color font-nunito-sans  space-y-1">
